@@ -6,15 +6,15 @@ namespace Multibonk.Game.Handlers.Logic
 {
     public class UpdateNetworkPlayerAnimationsEventHandler : GameEventHandler
     {
-        public UpdateNetworkPlayerAnimationsEventHandler() 
-        { 
+        public UpdateNetworkPlayerAnimationsEventHandler()
+        {
 
         }
 
 
         public override void FixedUpdate()
         {
-            foreach(var player in GamePatchFlags.PlayersCache.Values)
+            foreach (var player in GamePatchFlags.PlayersCache.Values)
             {
                 if (player.PlayerObject.IsNullOrDestroyed())
                     continue;

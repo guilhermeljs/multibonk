@@ -1,11 +1,11 @@
 ﻿namespace Multibonk.Networking.Comms
 {
-    using System;
     using global::Multibonk.Networking.Comms.Base;
     using global::Multibonk.Networking.Comms.Client;
     using global::Multibonk.Networking.Comms.Client.Protocols;
     using global::Multibonk.Networking.Comms.Server;
     using global::Multibonk.Networking.Comms.Server.Protocols;
+    using System;
 
     namespace Multibonk.Networking.Comms
     {
@@ -84,7 +84,7 @@
             public void Stop() => listener.Stop();
         }
 
-        public interface IExposableClientService 
+        public interface IExposableClientService
         {
             void Enqueue(OutgoingPacket packet);
         }

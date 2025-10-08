@@ -12,7 +12,7 @@ namespace Multibonk.Networking.Comms.Server.Handlers
         {
         }
         public void Handle(IncomingMessage msg, Connection conn)
-        { 
+        {
         }
     }
 }

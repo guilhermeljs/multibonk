@@ -1,6 +1,5 @@
 ﻿using Multibonk.Networking.Comms.Base;
 using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
-using Multibonk.Networking.Comms.Server.Handlers;
 
 namespace Multibonk.Networking.Comms.Server.Protocols
 {
@@ -17,7 +16,7 @@ namespace Multibonk.Networking.Comms.Server.Protocols
             IEnumerable<IServerPacketHandler> packetHandlers
         )
         {
-           handlers = packetHandlers.ToDictionary(h => h.PacketId);
+            handlers = packetHandlers.ToDictionary(h => h.PacketId);
         }
 
         public void HandleMessage(Connection conn, byte[] data, int start, int length)

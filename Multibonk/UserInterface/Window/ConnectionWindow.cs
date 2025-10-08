@@ -1,13 +1,13 @@
-﻿using MelonLoader;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Multibonk.UserInterface.Window
 {
-    public class ConnectionWindowEventArgs { 
+    public class ConnectionWindowEventArgs
+    {
         public string IP { get; }
         public string PlayerName { get; }
 
-        public ConnectionWindowEventArgs(string playerName, string ip) 
+        public ConnectionWindowEventArgs(string playerName, string ip)
         {
             IP = ip;
             PlayerName = playerName;
@@ -24,7 +24,7 @@ namespace Multibonk.UserInterface.Window
         private bool nameIsFocused = false;
         private bool ipIsFocused = false;
 
-        public ConnectionWindow() : base(new Rect(10, 10, 300, 200)) 
+        public ConnectionWindow() : base(new Rect(10, 10, 300, 200))
         {
             ipAddress = Preferences.IpAddress.Value;
             playerName = Preferences.PlayerName.Value;

@@ -1,5 +1,5 @@
-﻿using System.Collections.Concurrent;
-using MelonLoader;
+﻿using MelonLoader;
+using System.Collections.Concurrent;
 
 namespace Multibonk.Game.Handlers
 {

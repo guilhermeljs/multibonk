@@ -1,12 +1,7 @@
 ﻿using Il2Cpp;
 using Il2CppAssets.Scripts.Actors.Player;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using MelonLoader;
 using Multibonk.Networking.Comms.Base.Packet;
 using Multibonk.Networking.Lobby;
-using UnityEngine;
-using static Il2Cpp.AnimatedMeshScriptableObject;
-using static MelonLoader.MelonLaunchOptions;
 
 namespace Multibonk.Game.Handlers.NetworkNotify
 {

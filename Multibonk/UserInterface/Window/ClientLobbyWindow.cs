@@ -1,5 +1,4 @@
-﻿using MelonLoader;
-using Multibonk.Networking.Lobby;
+﻿using Multibonk.Networking.Lobby;
 using UnityEngine;
 
 namespace Multibonk.UserInterface.Window
@@ -9,7 +8,7 @@ namespace Multibonk.UserInterface.Window
         private LobbyContext lobby;
         public event Action OnLeaveLobby;
 
-        public ClientLobbyWindow(LobbyContext lobby) : base(new Rect(50, 50, 300, 200)) 
+        public ClientLobbyWindow(LobbyContext lobby) : base(new Rect(50, 50, 300, 200))
         {
             this.lobby = lobby;
         }

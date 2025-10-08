@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using Multibonk.UserInterface.Window;
-using MelonLoader;
+﻿using MelonLoader;
 using Multibonk.Networking.Lobby;
+using Multibonk.UserInterface.Window;
+using UnityEngine;
 
 namespace Multibonk
 {
@@ -69,17 +69,18 @@ namespace Multibonk
         public void OnGUI()
         {
             Event e = Event.current;
-            if(e.rawType == EventType.KeyDown && e.keyCode == KeyCode.F5)
+            if (e.rawType == EventType.KeyDown && e.keyCode == KeyCode.F5)
             {
                 _showingMenuBuffer = !_showingMenuBuffer;
             }
 
-            if(e.rawType == EventType.Layout && _showingMenuBuffer != IsShowingMenu)
+            if (e.rawType == EventType.Layout && _showingMenuBuffer != IsShowingMenu)
             {
                 IsShowingMenu = _showingMenuBuffer;
             }
 
-            if (IsShowingMenu) {
+            if (IsShowingMenu)
+            {
                 switch (currentState)
                 {
                     case UIState.Connection:

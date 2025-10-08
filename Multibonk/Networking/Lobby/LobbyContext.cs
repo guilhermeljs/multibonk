@@ -1,5 +1,4 @@
-﻿using Il2Cpp;
-using Multibonk.Networking.Comms.Base;
+﻿using Multibonk.Networking.Comms.Base;
 
 namespace Multibonk.Networking.Lobby
 {

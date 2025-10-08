@@ -1,9 +1,8 @@
 ﻿using Multibonk.Game;
-using Multibonk.Networking.Comms.Base.Packet;
-using Multibonk.Networking.Comms.Base;
-using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
-using UnityEngine;
 using Multibonk.Game.Handlers;
+using Multibonk.Networking.Comms.Base;
+using Multibonk.Networking.Comms.Base.Packet;
+using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
 
 namespace Multibonk.Networking.Comms.Client.Handlers
 {
@@ -18,7 +17,7 @@ namespace Multibonk.Networking.Comms.Client.Handlers
             var packet = new SpawnPlayerPacket(msg);
 
             GameDispatcher.Enqueue(() =>
-            {   
+            {
                 GameFunctions.SpawnNetworkPlayer(packet.PlayerId, packet.Character, packet.Position, packet.Rotation);
             });
         }

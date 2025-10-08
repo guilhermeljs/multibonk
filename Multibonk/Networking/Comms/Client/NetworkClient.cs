@@ -1,5 +1,5 @@
-﻿using System.Net.Sockets;
-using Multibonk.Networking.Comms.Base;
+﻿using Multibonk.Networking.Comms.Base;
+using System.Net.Sockets;
 
 namespace Multibonk.Networking.Comms.Client
 {
@@ -7,7 +7,7 @@ namespace Multibonk.Networking.Comms.Client
     {
         private TcpClient tcpClient;
         private Connection connection;
-        private IClientProtocol protocol; 
+        private IClientProtocol protocol;
 
 
         public bool IsConnected => tcpClient?.Connected ?? false;
@@ -18,7 +18,7 @@ namespace Multibonk.Networking.Comms.Client
             this.protocol = protocol;
 
             connection = new Connection(tcpClient);
-        } 
+        }
 
         private void InternalConnect(string ip, int port)
         {
@@ -40,7 +40,8 @@ namespace Multibonk.Networking.Comms.Client
         {
             if (IsConnected) throw new InvalidOperationException("Client already connected.");
 
-            new Thread(() => {
+            new Thread(() =>
+            {
                 InternalConnect(ip, port);
             }).Start();
         }

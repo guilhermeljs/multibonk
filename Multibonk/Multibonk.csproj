@@ -1,462 +1,463 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<OutputPath>C:\Program Files (x86)\Steam\steamapps\common\Megabonk\Mods</OutputPath>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="AsmResolver">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AsmResolver.dll</HintPath>
-    </Reference>
-    <Reference Include="AsmResolver.DotNet">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AsmResolver.DotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="AsmResolver.PE">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AsmResolver.PE.dll</HintPath>
-    </Reference>
-    <Reference Include="AsmResolver.PE.File">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AsmResolver.PE.File.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="AssetRipper.Primitives">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AssetRipper.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="AssetsTools.NET">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AssetsTools.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="bHapticsLib">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\bHapticsLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Iced">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Iced.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppCoffee.UIParticle">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppCoffee.UIParticle.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2Cppcom.rlabrecque.steamworks.net">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2Cppcom.rlabrecque.steamworks.net.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppDiscord">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppDiscord.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppInterop.Common">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Il2CppInterop.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppInterop.Generator">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Il2CppInterop.Generator.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppInterop.HarmonySupport">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Il2CppInterop.HarmonySupport.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppInterop.Runtime">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppMK.Toon">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppMK.Toon.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppMono.Security">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppMono.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2Cppmscorlib">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppNewtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppNewtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppRewired_Core">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppRewired_Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppRewired_Windows">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppRewired_Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Configuration">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Core">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Data">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Drawing">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Drawing.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Numerics">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Runtime.Serialization">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Runtime.Serialization.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Xml">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppSystem.Xml.Linq">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Xml.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2Cpp__Generated">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2Cpp__Generated.dll</HintPath>
-    </Reference>
-    <Reference Include="IndexRange">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\IndexRange.dll</HintPath>
-    </Reference>
-    <Reference Include="MelonLoader">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MelonLoader.dll</HintPath>
-    </Reference>
-    <Reference Include="MelonLoader.NativeHost">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MelonLoader.NativeHost.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Diagnostics.NETCore.Client">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Diagnostics.NETCore.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Diagnostics.Runtime">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Diagnostics.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Binder">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Options.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Mono.Cecil.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Mono.Cecil.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MonoMod.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.Backports">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MonoMod.Backports.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.ILHelpers">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MonoMod.ILHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MonoMod.RuntimeDetour.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MonoMod.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Configuration.ConfigurationManager">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\System.Configuration.ConfigurationManager.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.ProtectedData">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\System.Security.Cryptography.ProtectedData.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Permissions">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\System.Security.Permissions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Extensions">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\System.Windows.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Tomlet">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Tomlet.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Addressables">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.Addressables.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Localization">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.Localization.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.ProBuilder.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.KdTree">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.ProBuilder.KdTree.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.Poly2Tri">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.ProBuilder.Poly2Tri.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ResourceManager">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.ResourceManager.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Splines">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.Splines.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AccessibilityModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AccessibilityModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AIModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AndroidJNIModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AndroidJNIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AnimationModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ARModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ARModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AssetBundleModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AudioModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AudioModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ClothModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ClothModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CommandStateObserverModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.CommandStateObserverModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ContentLoadModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ContentLoadModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CrashReportingModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.CrashReportingModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.DirectorModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.DirectorModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.DSPGraphModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.DSPGraphModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.GameCenterModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.GameCenterModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.GIModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.GIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.GraphToolsFoundationModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.GraphToolsFoundationModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.GridModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.GridModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.HierarchyCoreModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.HierarchyCoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.HotReloadModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.HotReloadModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Il2CppAssetBundleManager">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\UnityEngine.Il2CppAssetBundleManager.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Il2CppImageConversionManager">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\UnityEngine.Il2CppImageConversionManager.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ImageConversionModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.IMGUIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputForUIModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.InputForUIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.InputLegacyModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.InputModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.JSONSerializeModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.JSONSerializeModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.LocalizationModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.LocalizationModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.MarshallingModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.MarshallingModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.MultiplayerModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.MultiplayerModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ParticleSystemModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.PerformanceReportingModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.PerformanceReportingModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Physics2DModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.Physics2DModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.PhysicsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ProfilerModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ProfilerModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.PropertiesModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.PropertiesModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ScreenCaptureModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ScreenCaptureModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SharedInternalsModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.SharedInternalsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SpriteMaskModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.SpriteMaskModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SpriteShapeModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.SpriteShapeModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.StreamingModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.StreamingModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SubstanceModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.SubstanceModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SubsystemsModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.SubsystemsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TerrainModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TerrainModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TerrainPhysicsModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TerrainPhysicsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextCoreFontEngineModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextCoreTextEngineModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TextRenderingModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TilemapModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TilemapModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TLSModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TLSModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UIElementsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UIModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UmbraModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UmbraModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityAnalyticsModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityAnalyticsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityConnectModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityConnectModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityCurlModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityCurlModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityTestProtocolModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityTestProtocolModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VehiclesModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.VehiclesModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VFXModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.VFXModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VideoModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.VideoModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VRModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.VRModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.WindModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.WindModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.XRModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.XRModule.dll</HintPath>
-    </Reference>
-    <Reference Include="WebSocketDotNet">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\WebSocketDotNet.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="0Harmony">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\0Harmony.dll</HintPath>
+		</Reference>
+		<Reference Include="AsmResolver">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AsmResolver.dll</HintPath>
+		</Reference>
+		<Reference Include="AsmResolver.DotNet">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AsmResolver.DotNet.dll</HintPath>
+		</Reference>
+		<Reference Include="AsmResolver.PE">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AsmResolver.PE.dll</HintPath>
+		</Reference>
+		<Reference Include="AsmResolver.PE.File">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AsmResolver.PE.File.dll</HintPath>
+		</Reference>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+		</Reference>
+		<Reference Include="AssetRipper.Primitives">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AssetRipper.Primitives.dll</HintPath>
+		</Reference>
+		<Reference Include="AssetsTools.NET">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\AssetsTools.NET.dll</HintPath>
+		</Reference>
+		<Reference Include="bHapticsLib">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\bHapticsLib.dll</HintPath>
+		</Reference>
+		<Reference Include="Iced">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Iced.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppCoffee.UIParticle">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppCoffee.UIParticle.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2Cppcom.rlabrecque.steamworks.net">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2Cppcom.rlabrecque.steamworks.net.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppDiscord">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppDiscord.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppInterop.Common">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Il2CppInterop.Common.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppInterop.Generator">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Il2CppInterop.Generator.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppInterop.HarmonySupport">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Il2CppInterop.HarmonySupport.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppInterop.Runtime">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppMK.Toon">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppMK.Toon.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppMono.Security">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppMono.Security.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2Cppmscorlib">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppNewtonsoft.Json">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppNewtonsoft.Json.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppRewired_Core">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppRewired_Core.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppRewired_Windows">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppRewired_Windows.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Configuration">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Configuration.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Core">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Data">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Data.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Drawing">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Drawing.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Numerics">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Numerics.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Runtime.Serialization">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Xml">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Xml.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2CppSystem.Xml.Linq">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2CppSystem.Xml.Linq.dll</HintPath>
+		</Reference>
+		<Reference Include="Il2Cpp__Generated">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Il2Cpp__Generated.dll</HintPath>
+		</Reference>
+		<Reference Include="IndexRange">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\IndexRange.dll</HintPath>
+		</Reference>
+		<Reference Include="MelonLoader">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MelonLoader.dll</HintPath>
+		</Reference>
+		<Reference Include="MelonLoader.NativeHost">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MelonLoader.NativeHost.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Bcl.AsyncInterfaces">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Diagnostics.NETCore.Client">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Diagnostics.NETCore.Client.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Diagnostics.Runtime">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Diagnostics.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Configuration">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Configuration.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Configuration.Binder">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Logging">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Logging.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Logging.Abstractions">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Options">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Options.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.Extensions.Primitives">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Microsoft.Extensions.Primitives.dll</HintPath>
+		</Reference>
+		<Reference Include="Mono.Cecil">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Mono.Cecil.dll</HintPath>
+		</Reference>
+		<Reference Include="Mono.Cecil.Mdb">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Mono.Cecil.Mdb.dll</HintPath>
+		</Reference>
+		<Reference Include="Mono.Cecil.Pdb">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Mono.Cecil.Pdb.dll</HintPath>
+		</Reference>
+		<Reference Include="Mono.Cecil.Rocks">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Mono.Cecil.Rocks.dll</HintPath>
+		</Reference>
+		<Reference Include="MonoMod">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MonoMod.dll</HintPath>
+		</Reference>
+		<Reference Include="MonoMod.Backports">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MonoMod.Backports.dll</HintPath>
+		</Reference>
+		<Reference Include="MonoMod.ILHelpers">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MonoMod.ILHelpers.dll</HintPath>
+		</Reference>
+		<Reference Include="MonoMod.RuntimeDetour">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MonoMod.RuntimeDetour.dll</HintPath>
+		</Reference>
+		<Reference Include="MonoMod.Utils">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\MonoMod.Utils.dll</HintPath>
+		</Reference>
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Newtonsoft.Json.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Configuration.ConfigurationManager">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\System.Configuration.ConfigurationManager.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Security.Cryptography.ProtectedData">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\System.Security.Cryptography.ProtectedData.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Security.Permissions">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\System.Security.Permissions.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Windows.Extensions">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\System.Windows.Extensions.dll</HintPath>
+		</Reference>
+		<Reference Include="Tomlet">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\Tomlet.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Addressables">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.Addressables.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Localization">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.Localization.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Mathematics">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.Mathematics.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Postprocessing.Runtime">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ProBuilder">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.ProBuilder.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ProBuilder.KdTree">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.ProBuilder.KdTree.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ProBuilder.Poly2Tri">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.ProBuilder.Poly2Tri.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.ResourceManager">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.ResourceManager.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.Splines">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.Splines.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.TextMeshPro">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\Unity.TextMeshPro.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AccessibilityModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AccessibilityModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AIModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AndroidJNIModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AndroidJNIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AnimationModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AnimationModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ARModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ARModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AssetBundleModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AssetBundleModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AudioModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.AudioModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ClothModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ClothModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CommandStateObserverModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.CommandStateObserverModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ContentLoadModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ContentLoadModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CrashReportingModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.CrashReportingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.DirectorModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.DirectorModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.DSPGraphModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.DSPGraphModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.GameCenterModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.GameCenterModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.GIModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.GIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.GraphToolsFoundationModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.GraphToolsFoundationModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.GridModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.GridModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.HierarchyCoreModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.HierarchyCoreModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.HotReloadModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.HotReloadModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.Il2CppAssetBundleManager">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\UnityEngine.Il2CppAssetBundleManager.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.Il2CppImageConversionManager">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\UnityEngine.Il2CppImageConversionManager.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ImageConversionModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ImageConversionModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.IMGUIModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.IMGUIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.InputForUIModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.InputForUIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.InputLegacyModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.InputLegacyModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.InputModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.InputModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.JSONSerializeModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.JSONSerializeModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.LocalizationModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.LocalizationModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.MarshallingModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.MarshallingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.MultiplayerModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.MultiplayerModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ParticleSystemModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ParticleSystemModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.PerformanceReportingModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.PerformanceReportingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.Physics2DModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.Physics2DModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.PhysicsModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.PhysicsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ProfilerModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ProfilerModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.PropertiesModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.PropertiesModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.ScreenCaptureModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.ScreenCaptureModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SharedInternalsModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.SharedInternalsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SpriteMaskModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.SpriteMaskModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SpriteShapeModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.SpriteShapeModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.StreamingModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.StreamingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SubstanceModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.SubstanceModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.SubsystemsModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.SubsystemsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TerrainModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TerrainModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TerrainPhysicsModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TextCoreFontEngineModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TextCoreTextEngineModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TextRenderingModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TextRenderingModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TilemapModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TilemapModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.TLSModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.TLSModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIElementsModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UIElementsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UIModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UIModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UmbraModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UmbraModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityAnalyticsModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityConnectModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityConnectModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityCurlModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityCurlModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityTestProtocolModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestAudioModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestTextureModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestWWWModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VehiclesModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.VehiclesModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VFXModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.VFXModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VideoModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.VideoModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.VRModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.VRModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.WindModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.WindModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.XRModule">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\Il2CppAssemblies\UnityEngine.XRModule.dll</HintPath>
+		</Reference>
+		<Reference Include="WebSocketDotNet">
+			<HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Megabonk\MelonLoader\net6\WebSocketDotNet.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Game\Utils\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Game\Utils\" />
+	</ItemGroup>
 
 	<PropertyGroup>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-	</PropertyGroup>                                     
-    
+	</PropertyGroup>
+
 </Project>

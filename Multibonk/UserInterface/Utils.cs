@@ -1,5 +1,4 @@
-﻿using MelonLoader;
-using UnityEngine;
+﻿using UnityEngine;
 
 public static class Utils
 {

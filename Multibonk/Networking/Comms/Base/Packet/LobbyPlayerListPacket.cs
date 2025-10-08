@@ -15,7 +15,7 @@ namespace Multibonk.Networking.Comms.Base.Packet
             foreach (var player in players)
             {
                 Message.WriteUShort(player.UUID);
-                Message.WriteString(player.Name);   
+                Message.WriteString(player.Name);
                 Message.WriteString(player.SelectedCharacter);
             }
         }
