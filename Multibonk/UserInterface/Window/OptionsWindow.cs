@@ -12,6 +12,7 @@ namespace Multibonk.UserInterface.Window
         private string reviveDelayInput = string.Empty;
         private float reviveDelaySeconds;
         private string reviveDelayError = string.Empty;
+        private bool reviveDelayFieldFocused;
         private Preferences.LootDistributionMode xpMode;
         private Preferences.LootDistributionMode goldMode;
         private Preferences.LootDistributionMode chestMode;
@@ -85,7 +86,7 @@ namespace Multibonk.UserInterface.Window
             GUILayout.BeginHorizontal();
             GUILayout.Label("Revive delay (seconds):", labelStyle, GUILayout.Width(180));
             GUI.enabled = reviveEnabled;
-            string newInput = GUILayout.TextField(reviveDelayInput, GUILayout.Width(80));
+            string newInput = Utils.CustomTextField(reviveDelayInput, ref reviveDelayFieldFocused, new Rect(0f, 0f, 80f, 22f));
             GUI.enabled = true;
 
             if (newInput != reviveDelayInput)
@@ -173,7 +174,7 @@ namespace Multibonk.UserInterface.Window
 
             string[] labels = { "Shared", "Individual", "Duplicated" };
             int currentIndex = (int)cache;
-            int selectedIndex = GUILayout.Toolbar(currentIndex, labels);
+            int selectedIndex = Utils.CustomToolbar(currentIndex, labels);
             if (selectedIndex != currentIndex)
             {
                 cache = (Preferences.LootDistributionMode)selectedIndex;
@@ -197,6 +198,7 @@ namespace Multibonk.UserInterface.Window
             reviveEnabled = Preferences.ReviveEnabled.Value;
             reviveDelaySeconds = Preferences.ReviveTimeSeconds.Value;
             reviveDelayInput = reviveDelaySeconds.ToString("0.##", CultureInfo.InvariantCulture);
+            reviveDelayFieldFocused = false;
             xpMode = Preferences.GetXpSharingMode();
             goldMode = Preferences.GetGoldSharingMode();
             chestMode = Preferences.GetChestSharingMode();
