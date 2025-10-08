@@ -30,40 +30,6 @@ public static class Utils
         }
     }
 
-    public static void HandleTextFieldInput(ref string text, ref bool isFocused, Rect rect)
-    {
-        Event e = Event.current;
-
-        if (!GUI.enabled)
-        {
-            isFocused = false;
-            return;
-        }
-
-        if (e.type == EventType.MouseDown)
-        {
-            isFocused = rect.Contains(e.mousePosition);
-        }
-
-        if (isFocused && e.type == EventType.KeyDown)
-        {
-            if ((e.keyCode == KeyCode.Backspace || e.keyCode == KeyCode.Delete) && text.Length > 0)
-            {
-                text = text.Substring(0, text.Length - 1);
-            }
-            else if (e.keyCode == KeyCode.Return || e.keyCode == KeyCode.KeypadEnter || e.keyCode == KeyCode.Escape || e.keyCode == KeyCode.Tab)
-            {
-                isFocused = false;
-            }
-            else if (e.character != '\0' && !char.IsControl(e.character))
-            {
-                text += e.character;
-            }
-
-            e.Use();
-        }
-    }
-
     public static string CustomTextField(string currentText, ref bool isFocused, Rect rect)
     {
         currentText ??= string.Empty;
@@ -84,12 +50,114 @@ public static class Utils
         }
 
         GUIStyle style = GUI.skin.textField;
+        int controlId = GUIUtility.GetControlID(FocusType.Keyboard);
         Rect calculated = GUILayoutUtility.GetRect(new GUIContent(currentText), style, options.ToArray());
 
-        HandleTextFieldInput(ref currentText, ref isFocused, calculated);
+        currentText = HandleTextFieldInput(currentText, calculated, controlId, ref isFocused);
 
-        GUI.Box(calculated, currentText, style);
+        if (Event.current.type == EventType.Repaint)
+        {
+            style.Draw(calculated, new GUIContent(currentText), controlId);
+        }
+
         return currentText;
+    }
+
+    private static string HandleTextFieldInput(string text, Rect rect, int controlId, ref bool isFocused)
+    {
+        Event e = Event.current;
+
+        switch (e.type)
+        {
+            case EventType.MouseDown:
+                if (GUI.enabled && rect.Contains(e.mousePosition))
+                {
+                    GUIUtility.hotControl = controlId;
+                    GUIUtility.keyboardControl = controlId;
+                    isFocused = true;
+                    e.Use();
+                }
+                else if (GUIUtility.keyboardControl == controlId)
+                {
+                    GUIUtility.keyboardControl = 0;
+                    isFocused = false;
+                }
+                break;
+
+            case EventType.MouseDrag:
+                if (GUIUtility.hotControl == controlId)
+                {
+                    e.Use();
+                }
+                break;
+
+            case EventType.MouseUp:
+                if (GUIUtility.hotControl == controlId)
+                {
+                    GUIUtility.hotControl = 0;
+                    e.Use();
+                }
+                break;
+
+            case EventType.KeyDown:
+                if (GUIUtility.keyboardControl == controlId && GUI.enabled)
+                {
+                    switch (e.keyCode)
+                    {
+                        case KeyCode.Backspace:
+                        case KeyCode.Delete:
+                            if (text.Length > 0)
+                            {
+                                text = text.Substring(0, text.Length - 1);
+                                GUI.changed = true;
+                            }
+                            e.Use();
+                            break;
+
+                        case KeyCode.Return:
+                        case KeyCode.KeypadEnter:
+                        case KeyCode.Escape:
+                        case KeyCode.Tab:
+                            GUIUtility.keyboardControl = 0;
+                            isFocused = false;
+                            e.Use();
+                            break;
+
+                        default:
+                            char c = e.character;
+                            if (!char.IsControl(c))
+                            {
+                                text += c;
+                                GUI.changed = true;
+                                e.Use();
+                            }
+                            break;
+                    }
+                }
+                break;
+        }
+
+        if (!GUI.enabled && GUIUtility.keyboardControl == controlId)
+        {
+            GUIUtility.keyboardControl = 0;
+            isFocused = false;
+        }
+
+        if (!GUI.enabled && GUIUtility.hotControl == controlId)
+        {
+            GUIUtility.hotControl = 0;
+        }
+
+        if (GUIUtility.keyboardControl != controlId && isFocused)
+        {
+            isFocused = false;
+        }
+        else if (GUIUtility.keyboardControl == controlId && !isFocused)
+        {
+            isFocused = true;
+        }
+
+        return text;
     }
 
     public static int CustomToolbar(int selectedIndex, string[] labels, params GUILayoutOption[] options)
