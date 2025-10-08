@@ -24,7 +24,7 @@
             private readonly ClientService client;
             public NetworkService(ServerProtocol serverPrt, ClientProtocol clientPrt)
             {
-                server = new ServerService(25565, serverPrt);
+                server = new ServerService(serverPrt);
                 client = new ClientService(clientPrt);
             }
 
@@ -46,12 +46,12 @@
             }
 
 
-            public void StartServer()
+            public void StartServer(int port)
             {
                 if (State != NetworkState.None)
                     throw new InvalidOperationException("Network already started.");
 
-                server.Start();
+                server.Start(port);
                 State = NetworkState.Hosting;
             }
 
@@ -73,15 +73,25 @@
 
         public class ServerService
         {
-            private readonly Listener listener;
+            private readonly ServerProtocol protocol;
+            private Listener listener;
 
-            public ServerService(int port, ServerProtocol protocol)
+            public ServerService(ServerProtocol protocol)
             {
-                listener = new Listener(port, protocol);
+                this.protocol = protocol;
             }
 
-            public void Start() => listener.Start();
-            public void Stop() => listener.Stop();
+            public void Start(int port)
+            {
+                listener = new Listener(port, protocol);
+                listener.Start();
+            }
+
+            public void Stop()
+            {
+                listener?.Stop();
+                listener = null;
+            }
         }
 
         public interface IExposableClientService

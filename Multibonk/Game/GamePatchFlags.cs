@@ -19,5 +19,12 @@ namespace Multibonk.Game
 
         public static Vector3 LastPlayerPosition { get; set; }
         public static Quaternion LastPlayerRotation { get; set; }
+
+        public static GameplayRulesSnapshot GameplayRules { get; private set; } = GameplayRulesSnapshot.FromPreferences();
+
+        public static void SetGameplayRules(GameplayRulesSnapshot snapshot)
+        {
+            GameplayRules = snapshot;
+        }
     }
 }
