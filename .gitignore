@@ -1,0 +1,43 @@
+# Build outputs
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.app
+*.so
+*.dylib
+
+# Rider / VS / VSCode
+.vs/
+*.suo
+*.user
+*.userprefs
+*.csproj.user
+*.sln.docstates
+.idea/
+.vscode/
+
+# Unity specific
+Library/
+Temp/ 
+Obj/
+Build/
+Builds/
+MemoryCaptures/
+*.log
+*.pidb
+*.booproj
+*.svd
+*.apk
+*.aab
+
+# OS generated
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
