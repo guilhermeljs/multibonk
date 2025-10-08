@@ -29,7 +29,10 @@ namespace Multibonk.UserInterface.Window
         public event Action PreferencesChanged;
         public event Action OpenSteamOverlayRequested;
 
-        public OptionsWindow() : base(new Rect(80, 80, 520, 420))
+        private const float WindowWidth = 520f;
+        private const float WindowHeight = 520f;
+
+        public OptionsWindow() : base(new Rect(80f, 80f, WindowWidth, WindowHeight))
         {
             RefreshFromPreferences();
         }
@@ -85,9 +88,10 @@ namespace Multibonk.UserInterface.Window
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Revive delay (seconds):", labelStyle, GUILayout.Width(180));
+            bool previousGuiState = GUI.enabled;
             GUI.enabled = reviveEnabled;
             string newInput = Utils.CustomTextField(reviveDelayInput, ref reviveDelayFieldFocused, new Rect(0f, 0f, 80f, 22f));
-            GUI.enabled = true;
+            GUI.enabled = previousGuiState;
 
             if (newInput != reviveDelayInput)
             {
@@ -115,28 +119,28 @@ namespace Multibonk.UserInterface.Window
             }
 
             GUILayout.EndHorizontal();
-            GUILayout.Space(10f);
+            AddVerticalSpace(10f);
 
             DrawDistributionSection("Experience sharing", ref xpMode, Preferences.SetXpSharingMode,
                 "Shared: everyone gains XP together.",
                 "Individual: only the collector gains XP.",
                 "Duplicated: each drop spawns for every player.");
 
-            GUILayout.Space(6f);
+            AddVerticalSpace(6f);
 
             DrawDistributionSection("Gold sharing", ref goldMode, Preferences.SetGoldSharingMode,
                 "Shared: the team uses one shared wallet.",
                 "Individual: everyone keeps their own gold.",
                 "Duplicated: pickups reward every player equally.");
 
-            GUILayout.Space(6f);
+            AddVerticalSpace(6f);
 
             DrawDistributionSection("Chest rewards", ref chestMode, Preferences.SetChestSharingMode,
                 "Shared: every chest rewards the whole team.",
                 "Individual: each player must open the chest themselves.",
                 "Duplicated: each chest can be opened once per player.");
 
-            GUILayout.Space(12f);
+            AddVerticalSpace(12f);
 
             DrawSteamOverlaySection();
 
@@ -253,6 +257,11 @@ namespace Multibonk.UserInterface.Window
 
             errorLabelStyle = new GUIStyle(windowLabelStyle);
             errorLabelStyle.normal.textColor = Color.red;
+        }
+
+        private static void AddVerticalSpace(float pixels)
+        {
+            GUILayoutUtility.GetRect(GUIContent.none, GUIStyle.none, GUILayout.Height(pixels));
         }
 
         private static void ApplyWhiteText(GUIStyle style)
