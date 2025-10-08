@@ -48,3 +48,7 @@ To contribute:
 8. Push your changes and open a Pull Request.  
 
 Every contribution helps make the multiplayer experience better!
+
+## Contact me
+
+Discord: guijas5308
