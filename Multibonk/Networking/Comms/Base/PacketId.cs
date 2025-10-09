@@ -12,6 +12,7 @@
 
        PLAYER_MOVED_PACKET = 7,
        PLAYER_ROTATED_PACKET = 8,
+       MAP_OBJECT_CHUNK_PACKET
     }
 
     public enum ClientSentPacketId : byte

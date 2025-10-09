@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using HarmonyLib;
 using Il2Cpp;
 using Il2CppAssets.Scripts.Actors.Player;
+using Il2CppAssets.Scripts.Game.MapGeneration;
 using Il2CppRewired.Utils;
 using Il2CppTMPro;
 using MelonLoader;
@@ -45,6 +46,8 @@ namespace Multibonk.Game.Patches
             }
         }
 
+
+
         [HarmonyPatch(typeof(MyPlayer), "FixedUpdate")]
         class PlayerUpdatedPatch
         {
@@ -70,6 +73,15 @@ namespace Multibonk.Game.Patches
                     GamePatchFlags.LastPlayerRotation = rotation;
                     GameEvents.TriggerPlayerRotated(rotation);
                 }
+            }
+        }
+
+        [HarmonyPatch(typeof(MapEntry), "OnMapSelected")]
+        class MapEntrySelectedPatch
+        {
+            static void Postfix(SelectionGroupToggleSingleButton __0, MapData __1)
+            {
+                GamePatchFlags.SelectedMapData = __1;
             }
         }
 
@@ -121,45 +133,123 @@ namespace Multibonk.Game.Patches
             }
         }
 
+        /// <summary>
+        /// Spawn all chests generated randomly
+        /// </summary>
+        [HarmonyPatch(typeof(SpawnInteractables), "SpawnChests")]
+        class ChestPatch
+        {
+            static bool Prefix() => LobbyPatchFlags.IsHosting;
+        }
 
-        //[HarmonyPatch(typeof(SpawnInteractables), "SpawnChests")]
-        //class ChestPatch
+        /// <summary>
+        /// Spawns some trees, interactables, doesn't seem to have a pattern
+        /// </summary>
+        [HarmonyPatch(typeof(SpawnInteractables), "SpawnOther")]
+        class SpawnOtherPatch
+        {
+            static bool Prefix() => LobbyPatchFlags.IsHosting;
+        }
+        /// <summary>
+        /// ???
+        /// </summary>
+
+        [HarmonyPatch(typeof(SpawnInteractables), "SpawnRails")]
+        class SpawnRailsPatch
+        {
+            static bool Prefix() => LobbyPatchFlags.IsHosting;
+        }
+
+        /// <summary>
+        /// ???
+        /// </summary>
+        [HarmonyPatch(typeof(SpawnInteractables), "SpawnShit")]
+        class SpawnShitPatch
+        {
+            static bool Prefix() => LobbyPatchFlags.IsHosting;
+        }
+
+        /// <summary>
+        /// Spawns random kind of interactable shrines, those where you spawn bosses or interact pressing E.
+        /// The ChargeShrines (those who give you stats looks like it is not included in this function, looks like they're instanced using RandomObjectSpawner)
+        /// </summary>
+        [HarmonyPatch(typeof(SpawnInteractables), "SpawnShrines")]
+        class SpawnShrinesPatch
+        {
+            static bool Prefix() => LobbyPatchFlags.IsHosting;
+        }
+
+        [HarmonyPatch(typeof(RandomObjectPlacer), "Generate")]
+        class GenerateHook
+        {
+            static bool Prefix() => LobbyPatchFlags.IsHosting;
+        }
+
+
+        //[HarmonyPatch(typeof(MapGenerationController), "Awake")]
+        //class GeneratorAll
         //{
-        //    static bool Prefix()
+        //    static bool Prefix(RandomObjectPlacer __instance)
         //    {
+        //        MelonLogger.Msg("Generatig controller called");
+
         //        return false;
         //    }
         //}
 
-        //[HarmonyPatch(typeof(SpawnInteractables), "SpawnOther")]
-        //class SpawnOtherPatch
-        //{
-        //    static bool Prefix() => false;
-        //}
+        [HarmonyPatch(typeof(RandomObjectPlacer), "GenerateInteractables")]
+        class GenerateHookPatch2
+        {
+            static bool Prefix(RandomObjectPlacer __instance)
+            {
+                if(LobbyPatchFlags.IsHosting)
+                    return true;
 
-        //[HarmonyPatch(typeof(SpawnInteractables), "SpawnRails")]
-        //class SpawnRailsPatch
-        //{
-        //    static bool Prefix() => false;
-        //}
+                MelonLogger.Msg("Generating interactables called");
 
-        //[HarmonyPatch(typeof(SpawnInteractables), "SpawnShit")]
-        //class SpawnShitPatch
-        //{
-        //    static bool Prefix() => false;
-        //}
-
-        //[HarmonyPatch(typeof(SpawnInteractables), "SpawnShrines")]
-        //class SpawnShrinesPatch
-        //{
-        //    static bool Prefix() => false;
-        //}
+                return false;
+            }
+        }
 
 
+        /// <summary>
+        /// Spawns a List<GameObject> of objects in the tile meshes.
+        /// Common prefabs spawned are: Some trees, boxes, pilars and castles
+        /// </summary>
+        [HarmonyPatch(typeof(GenerateTileObjects), "Generate")]
+        class GenerateTileObjectsT
+        {
+            static bool Prefix(ref List<GameObject> __0)
+            {
+                if(LobbyPatchFlags.IsHosting)
+                    return true;
 
+                MelonLogger.Msg("Generate called - prefabs");
 
+                __0 = new List<GameObject>();
 
+                return false;
+            }
+        }
 
+        /// <summary>
+        /// Spawns a lot of objects that come from MapData and StageData
+        /// </summary>
 
+        [HarmonyPatch(typeof(RandomObjectPlacer), "RandomObjectSpawner")]
+        class GenerateHookPatch3
+        {
+            static bool Prefix(RandomMapObject __0)
+            {
+                if (LobbyPatchFlags.IsHosting)
+                    return true;
+
+                MelonLogger.Msg($"Spawning group ({__0.prefabs.Count}) prefabs:");
+                foreach (var prefab in __0.prefabs)
+                    MelonLogger.Msg("  - " + prefab.name);
+
+                return false;
+            }
+        }
     }
 }

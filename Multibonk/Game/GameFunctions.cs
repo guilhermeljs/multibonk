@@ -1,5 +1,6 @@
 ﻿using Il2Cpp;
 using Il2CppRewired.Utils;
+using Multibonk.Networking.Comms.Base.Packet;
 using UnityEngine;
 
 namespace Multibonk.Game
@@ -17,6 +18,28 @@ namespace Multibonk.Game
             MyButtonCharacter[] buttons = UnityEngine.Object.FindObjectsOfType<MyButtonCharacter>();
             GamePatchFlags.CharacterData = buttons.Select(b => b.characterData).ToList();
             GamePatchFlags.CharacterDataInitialized = true;
+        }
+
+        public static Dictionary<int, List<GameObject>> GetAllSpawnedMapDataPrefabs()
+        {
+            var output = new Dictionary<int, List<GameObject>>();
+
+            var allObjects = GameObject.FindObjectsOfType<GameObject>();
+
+            var prefabs = GamePatchFlags.MapDataIndexedPrefabs;
+            for (int i = 0; i < prefabs.Count; i++)
+            {
+                var prefab = prefabs[i];
+                string targetName = prefab.name + "(Clone)";
+
+                var instances = allObjects
+                    .Where(go => go.name == targetName)
+                    .ToList();
+
+                output.Add(i, instances);
+            }
+
+            return output;
         }
 
         public static SpawnedNetworkPlayer GetSpawnedPlayerFromId(ushort playerId)

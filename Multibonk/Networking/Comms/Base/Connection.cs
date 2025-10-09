@@ -7,7 +7,7 @@ namespace Multibonk.Networking.Comms.Base
     public class Connection
     {
         private const int HEADER_LENGTH = 2;
-        private const int MAX_PACKET_SIZE = 1024;
+        private const int MAX_PACKET_SIZE = 16384;
 
         private readonly TcpClient client;
         private NetworkStream stream;
@@ -103,7 +103,7 @@ namespace Multibonk.Networking.Comms.Base
 
 
                 if (packetLength <= 0 || packetLength > MAX_PACKET_SIZE - HEADER_LENGTH)
-                    throw new IOException("Invalid packet length");
+                    throw new IOException($"Invalid packet length {packetLength}");
 
                 await ReadExact(buffer, HEADER_LENGTH, packetLength);
 
@@ -129,12 +129,15 @@ namespace Multibonk.Networking.Comms.Base
         {
             if (!client.Connected) throw new InvalidOperationException("Client not connected.");
             if (data.Length + HEADER_LENGTH > MAX_PACKET_SIZE)
-                throw new ArgumentException($"Packet too large, max {MAX_PACKET_SIZE - HEADER_LENGTH} bytes");
+                throw new ArgumentException($"Packet too large, max {MAX_PACKET_SIZE - HEADER_LENGTH} bytes, received {data.Length}");
+            if(data.Length == 0)
+                throw new ArgumentException("Empty packet sent");
 
             byte[] packet = new byte[data.Length + HEADER_LENGTH];
             Array.Copy(BitConverter.GetBytes((short)data.Length), packet, HEADER_LENGTH);
             Array.Copy(data, 0, packet, HEADER_LENGTH, data.Length);
 
+            var hex = BitConverter.ToString(packet).Replace("-", " ");
 
             await stream.WriteAsync(packet, 0, packet.Length);
         }

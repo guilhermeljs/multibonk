@@ -68,6 +68,8 @@ namespace Multibonk
             services.AddSingleton<IClientPacketHandler, StartGamePacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerMovedPacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerRotatedPacketHandler>();
+            services.AddSingleton<IClientPacketHandler, MapFinishedLoadingPacketHandler>();
+            services.AddSingleton<IClientPacketHandler, MapObjectChunkPacketHandler>();
 
             services.AddSingleton<ClientProtocol>();
             services.AddSingleton<ServerProtocol>();

@@ -1,12 +1,9 @@
 ﻿using Il2Cpp;
 using Il2CppAssets.Scripts.Actors.Player;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using MelonLoader;
 using Multibonk.Networking.Comms.Base.Packet;
 using Multibonk.Networking.Lobby;
 using UnityEngine;
-using static Il2Cpp.AnimatedMeshScriptableObject;
-using static MelonLoader.MelonLaunchOptions;
 
 namespace Multibonk.Game.Handlers.NetworkNotify
 {
@@ -39,6 +36,47 @@ namespace Multibonk.Game.Handlers.NetworkNotify
                             player.Connection.EnqueuePacket(packet);
                         });
                 });
+            };
+
+            GameEvents.GameLoadedEvent += () =>
+            {
+                var spawnedObjects = GameFunctions.GetAllSpawnedMapDataPrefabs();
+
+
+                var maxChunkSize = 50;
+
+                lobbyContext.GetPlayers()
+                    .Where(player => player.Connection != null)
+                    .ToList()
+                    .ForEach(player =>
+                    {
+                        foreach (var entry in spawnedObjects)
+                        {
+                            int listId = entry.Key;
+                            var allObjects = entry.Value;
+                            int total = allObjects.Count;
+                            int chunks = Mathf.CeilToInt((float)total / maxChunkSize);
+
+                            if (total == 0)
+                                MelonLogger.Msg($"Prefab with id {entry.Key} is empty");
+
+                            for (int i = 0; i < chunks; i++)
+                            {
+                                var chunkObjects = allObjects
+                                    .Skip(i * maxChunkSize)
+                                    .Take(maxChunkSize)
+                                    .ToList();
+
+                                var chunkPacket = new SendMapObjectChunkPacket(listId, chunkObjects);
+                                MelonLogger.Msg($"Sending chunk of {chunkObjects.Count} gameobjects from prefab {listId} packet length {chunkPacket.ToBuffer().Length + 2}");
+
+                                player.Connection.EnqueuePacket(chunkPacket);
+                            }
+                        }
+
+                        var finishedPacket = new SendMapFinishedLoadingPacket();
+                        player.Connection.EnqueuePacket(finishedPacket);
+                    });
             };
         }
 

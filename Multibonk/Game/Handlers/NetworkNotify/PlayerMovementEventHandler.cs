@@ -12,8 +12,6 @@ namespace Multibonk.Game.Handlers.NetworkNotify
             LobbyContext lobbyContext
         )
         {
-
-
             GameEvents.PlayerMoveEvent += (pos) =>
             {
                 if (LobbyPatchFlags.IsHosting)
