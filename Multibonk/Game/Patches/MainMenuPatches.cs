@@ -6,6 +6,7 @@ using Il2Cpp;
 using Il2CppAssets.Scripts.Actors.Player;
 using Il2CppAssets.Scripts.Game.MapGeneration;
 using Il2CppAssets.Scripts.Inventory__Items__Pickups;
+using Il2CppInventory__Items__Pickups.Xp_and_Levels;
 using Il2CppRewired.Utils;
 using Il2CppTMPro;
 using MelonLoader;
@@ -196,6 +197,22 @@ namespace Multibonk.Game.Patches
                     return true;
 
                 return false;
+            }
+        }
+
+        [HarmonyPatch(typeof(PlayerXp), "AddXp")]
+        class AddXpPatch
+        {
+            static bool Prefix(int __0)
+            {
+                // This means that our managed code is calling AddXp and not the game. So the function must run correctly
+                // This guarantees that we won't trigger the AddXpEvent from a Xp that was received from the network
+                if (GamePatchFlags.AllowAddXpCall)
+                    return true;
+
+                GameEvents.TriggerAddXpEvent(__0);
+
+                return true;
             }
         }
 

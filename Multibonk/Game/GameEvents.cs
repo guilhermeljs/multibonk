@@ -31,6 +31,7 @@ namespace Multibonk.Game
         public static event Action OpenChestEvent;
 
         public static event Action PlayerLevelUpEvent;
+        public static event Action<int> PlayerXpAddedEvent;
 
 
         public static void TriggerConfirmMap()
@@ -46,6 +47,11 @@ namespace Multibonk.Game
         public static void TriggerCharacterChanged(CharacterData character)
         {
             CharacterChanged?.Invoke(character);
+        }
+
+        public static void TriggerAddXpEvent(int amount)
+        {
+            PlayerXpAddedEvent?.Invoke(amount);
         }
 
         public static void TriggerGameLoadedEvent()

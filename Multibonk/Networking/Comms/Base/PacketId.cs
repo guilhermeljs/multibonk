@@ -12,7 +12,8 @@
 
        PLAYER_MOVED_PACKET = 7,
        PLAYER_ROTATED_PACKET = 8,
-       MAP_OBJECT_CHUNK_PACKET
+       MAP_OBJECT_CHUNK_PACKET = 9,
+       XP_PACKET = 10
     }
 
     public enum ClientSentPacketId : byte
@@ -21,6 +22,7 @@
         CHARACTER_SELECTION = 1,
         GAME_LOADED_PACKET = 2,
         PLAYER_MOVE_PACKET = 3,
-        PLAYER_ROTATE_PACKET = 4
+        PLAYER_ROTATE_PACKET = 4,
+        PICKUP_XP_PACKET = 5
     }
 }

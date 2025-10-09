@@ -47,7 +47,9 @@ namespace Multibonk.Game
 
         public static int Seed { get; set; } = _rng.Next(int.MinValue, int.MaxValue);
 
-        public static bool AllowStartMapCall { get; set; } = false; 
+        public static bool AllowStartMapCall { get; set; } = false;
+        public static bool AllowAddXpCall { get; set; } = false;
+
         public static Vector3 LastPlayerPosition { get; set; }
         public static Quaternion LastPlayerRotation { get; set; }
     }
