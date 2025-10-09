@@ -1,5 +1,6 @@
 ﻿using Il2Cpp;
 using Il2CppRewired.Utils;
+using MelonLoader;
 using UnityEngine;
 
 namespace Multibonk.Game.Handlers.Logic
@@ -20,11 +21,15 @@ namespace Multibonk.Game.Handlers.Logic
                     continue;
 
                 // Players with more than 300ms can appear lagged
-                if (Time.time - player.LastTimeMoved > 0.3f)
+                if (Time.time - player.LastTimeMoved > 0.12f)
                 {
                     var renderer = player.PlayerObject.GetComponentInChildren<PlayerRenderer>();
-                    if (renderer != null)
+                    if (renderer != null && renderer.moving)
+                    {
+                        renderer.moving = false;
                         renderer.ForceMoving(false);
+                        renderer.SetIdle();
+                    }
                 }
             }
         }

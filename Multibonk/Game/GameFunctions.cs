@@ -1,5 +1,10 @@
 ﻿using Il2Cpp;
+using Il2CppAssets.Scripts.Actors;
+using Il2CppAssets.Scripts.Inventory__Items__Pickups;
+using Il2CppInterop.Runtime.Runtime;
+using Il2CppInterop.Runtime;
 using Il2CppRewired.Utils;
+using MelonLoader;
 using Multibonk.Networking.Comms.Base.Packet;
 using UnityEngine;
 
@@ -71,12 +76,13 @@ namespace Multibonk.Game
 
             var rendererContainer = new GameObject("NetworkPlayer");
             rendererContainer.transform.SetParent(player.transform);
+            rendererContainer.layer = LayerMask.NameToLayer("Default");
 
             var renderer = rendererContainer.AddComponent<PlayerRenderer>();
 
             var inv = new PlayerInventory(data);
             renderer.SetCharacter(data, inv, position);
-            renderer.CreateMaterials(4);
+            renderer.CreateMaterials(1);
 
             rendererContainer.transform.localPosition = new Vector3(0, -(data.colliderHeight / 2), 0);
             rendererContainer.transform.localRotation = Quaternion.identity;

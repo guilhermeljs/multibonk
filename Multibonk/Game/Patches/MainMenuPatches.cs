@@ -5,6 +5,7 @@ using HarmonyLib;
 using Il2Cpp;
 using Il2CppAssets.Scripts.Actors.Player;
 using Il2CppAssets.Scripts.Game.MapGeneration;
+using Il2CppAssets.Scripts.Inventory__Items__Pickups;
 using Il2CppRewired.Utils;
 using Il2CppTMPro;
 using MelonLoader;
@@ -183,6 +184,19 @@ namespace Multibonk.Game.Patches
         class GenerateHook
         {
             static bool Prefix() => LobbyPatchFlags.IsHosting;
+        }
+
+
+        [HarmonyPatch(typeof(PlayerRenderer), "OnDamage")]
+        class DamageWrapperPatch
+        {
+            static bool Prefix(PlayerRenderer __instance)
+            {
+                if (__instance.gameObject.layer == LayerMask.NameToLayer("Player"))
+                    return true;
+
+                return false;
+            }
         }
 
 
