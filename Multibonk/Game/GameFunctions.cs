@@ -7,6 +7,7 @@ using Il2CppRewired.Utils;
 using MelonLoader;
 using Multibonk.Networking.Comms.Base.Packet;
 using UnityEngine;
+using Multibonk.Game.Patches;
 
 namespace Multibonk.Game
 {
@@ -117,14 +118,6 @@ namespace Multibonk.Game
         {
             PlayerObject.transform.position = position;
             LastTimeMoved = Time.time;
-
-            var renderer = PlayerObject.GetComponentInChildren<PlayerRenderer>();
-
-            if (!renderer.moving)
-            {
-                renderer.moving = true;
-                renderer.ForceMoving(true);
-            }
         }
         public void Rotate(Vector3 rotation)
         {

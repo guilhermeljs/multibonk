@@ -22,6 +22,9 @@ namespace Multibonk.Networking.Comms.Server.Handlers
         {
             var packet = new PlayerPickupXpPacket(msg);
 
+            if(!Preferences.LevelSynchronization.Value)
+                return;
+
             GameDispatcher.Enqueue(() =>
             {
                 try

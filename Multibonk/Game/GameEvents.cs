@@ -34,6 +34,18 @@ namespace Multibonk.Game
         public static event Action<int> PlayerXpAddedEvent;
 
 
+        public static event Action<Animator, string, bool> SetBoolEvent;
+        public static event Action<Animator, string, float> SetFloatEvent;
+        public static event Action<Animator, string, int> SetIntEvent;
+        public static event Action<Animator, string> SetTriggerEvent;
+
+
+        public static void TriggerSetBool(Animator animator, string param, bool value) => SetBoolEvent?.Invoke(animator, param, value);
+        public static void TriggerSetFloat(Animator animator, string param, float value) => SetFloatEvent?.Invoke(animator, param, value);
+        public static void TriggerSetInt(Animator animator, string param, int value) => SetIntEvent?.Invoke(animator, param, value);
+        public static void TriggerSetTrigger(Animator animator, string param) => SetTriggerEvent?.Invoke(animator, param);
+
+
         public static void TriggerConfirmMap()
         {
             ConfirmMapEvent?.Invoke();

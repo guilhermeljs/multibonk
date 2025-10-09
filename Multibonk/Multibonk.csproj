@@ -453,6 +453,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Game\Handlers\Logic\" />
     <Folder Include="Game\Utils\" />
   </ItemGroup>
 

@@ -13,7 +13,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
         {
             GameEvents.PlayerXpAddedEvent += (xp) =>
             {
-                if (LobbyPatchFlags.IsHosting)
+                if (LobbyPatchFlags.IsHosting && Preferences.LevelSynchronization.Value)
                 {
                     lobbyContext.GetPlayers().ForEach(player =>
                     {
@@ -22,6 +22,9 @@ namespace Multibonk.Game.Handlers.NetworkNotify
                     });
                 }
 
+                // TODO: Synchronize server preferences with client preferences
+                // So we won't need to send this packet if LevelSynchronization is setted to false.
+                // Today, if LevelSynchronization is disabled we only ignore the píckup packet in server side
                 if(!LobbyPatchFlags.IsHosting)
                 {
                     var pickupXpPacket = new SendPlayerPickupXpPacket(xp);

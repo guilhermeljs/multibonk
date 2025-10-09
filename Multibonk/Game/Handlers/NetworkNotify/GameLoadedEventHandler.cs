@@ -2,6 +2,8 @@
 using Il2CppAssets.Scripts.Actors.Player;
 using MelonLoader;
 using Multibonk.Networking.Comms.Base.Packet;
+using Multibonk.Networking.Comms.Client.Handlers;
+using Multibonk.Networking.Comms.Multibonk.Networking.Comms;
 using Multibonk.Networking.Lobby;
 using UnityEngine;
 
@@ -9,8 +11,13 @@ namespace Multibonk.Game.Handlers.NetworkNotify
 {
     public class GameLoadedEventHandler : GameEventHandler
     {
-        public GameLoadedEventHandler(LobbyContext lobbyContext)
+        public LobbyContext LobbyContext { get; private set; }
+        public NetworkService NetworkService { get; private set; }
+
+        public GameLoadedEventHandler(LobbyContext lobbyContext, NetworkService networkService)
         {
+            LobbyContext = lobbyContext;
+            NetworkService = networkService;
 
             GameEvents.GameLoadedEvent += () =>
             {
@@ -78,7 +85,58 @@ namespace Multibonk.Game.Handlers.NetworkNotify
                         player.Connection.EnqueuePacket(finishedPacket);
                     });
             };
+
+            // This event shouldn't be here. TODO: Fix this
+            GameEvents.SetBoolEvent += (anim, param, v) =>
+            {
+                if (MyPlayer.Instance.playerRenderer.animator != anim)
+                    return;
+
+                if (LobbyPatchFlags.IsHosting)
+                {
+                    HandleHostingAnimatorEvent(param, v);
+                }else
+                {
+                    HandleClientAnimatorEvent(param, v);
+                }
+
+            };
         }
 
+        private void HandleClientAnimatorEvent(string param, bool v)
+        {
+            var animId = SendPlayerAnimatorPacket.StringToAnimationId(param);
+            if (animId == null)
+                return;
+
+            var packet = new SendPlayerAnimatorPacket(
+                animId.Value,
+                v
+            );
+
+            NetworkService.GetClientService().Enqueue(packet);
+        }
+
+        private void HandleHostingAnimatorEvent(string param, bool v)
+        {
+            var animationId = SendPlayerAnimatorPacket.StringToAnimationId(param);
+            if (animationId == null)
+                return;
+
+            var serverSentPacket = new SendPlayerAnimatorChangedPacket(
+                LobbyContext.GetMyself().UUID,
+                (PlayerAnimationId)animationId,
+                v
+            );
+
+            foreach (var player in LobbyContext.GetPlayers())
+            {
+                if (player.Connection == null)
+                    continue;
+
+                player.Connection.EnqueuePacket(serverSentPacket);
+            }
+        }
     }
+
 }

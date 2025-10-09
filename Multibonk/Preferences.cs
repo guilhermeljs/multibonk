@@ -10,6 +10,7 @@ namespace Multibonk
         public static readonly MelonPreferences_Entry<string> PlayerName;
 
         public static readonly MelonPreferences_Entry<bool> LevelSynchronization;
+        public static readonly MelonPreferences_Entry<bool> PauseSynchronization;
 
 
         static Preferences()
@@ -20,6 +21,7 @@ namespace Multibonk
             PlayerName = category.CreateEntry("PlayerName", "PlayerName", description: "PlayerName used at connection window");
 
             LevelSynchronization = category.CreateEntry("LevelSynchronization", true, description: "Enable or disable sharing levels and XP");
+            PauseSynchronization = category.CreateEntry("PauseSynchronization", true, description: "When enabled, your game will automatically pause whenever a friend pauses theirs.");
         }
     }
 }

@@ -11,7 +11,7 @@ using Multibonk.Game.Handlers;
 using Multibonk.Game;
 using Multibonk.Networking.Comms.Base;
 using Multibonk.Game.Handlers.NetworkNotify;
-using Multibonk.Game.Handlers.Logic;
+using Il2Cpp;
 
 namespace Multibonk
 {
@@ -37,6 +37,7 @@ namespace Multibonk
             executor.FixedUpdate();
         }
 
+
         public override void OnLateUpdate()
         {
             executor.LateUpdate();
@@ -52,7 +53,6 @@ namespace Multibonk
             services.AddSingleton<IGameEventHandler, PlayerMovementEventHandler>();
             services.AddSingleton<IGameEventHandler, StartGameEventHandler>();
             services.AddSingleton<IGameEventHandler, PlayerLevelEventHandler>();
-            services.AddSingleton<IGameEventHandler, UpdateNetworkPlayerAnimationsEventHandler>();
             services.AddSingleton<IGameEventHandler, GameDispatcher>();
 
             services.AddSingleton<EventHandlerExecutor>();
@@ -61,12 +61,14 @@ namespace Multibonk
             services.AddSingleton<IServerPacketHandler, SelectCharacterPacketHandler>();
             services.AddSingleton<IServerPacketHandler, PlayerMovePacketHandler>();
             services.AddSingleton<IServerPacketHandler, PlayerRotatePacketHandler>();
+            services.AddSingleton<IServerPacketHandler, PlayerAnimatorPacketHandler>();
             services.AddSingleton<IServerPacketHandler, GameLoadedPacketHandler>();
             services.AddSingleton<IServerPacketHandler, PlayerPickupXpPacketHandler>();
 
             services.AddSingleton<IClientPacketHandler, LobbyPlayerListPacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerSelectedCharacterPacketHandler>();
             services.AddSingleton<IClientPacketHandler, SpawnPlayerPacketHandler>();
+            services.AddSingleton<IClientPacketHandler, PlayerAnimatorChangedPacketHandler>();
             services.AddSingleton<IClientPacketHandler, StartGamePacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerXpPacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerMovedPacketHandler>();

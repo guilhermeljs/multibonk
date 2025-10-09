@@ -1,5 +1,6 @@
 ﻿
 
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using HarmonyLib;
 using Il2Cpp;
@@ -8,6 +9,7 @@ using Il2CppAssets.Scripts.Game.MapGeneration;
 using Il2CppAssets.Scripts.Inventory__Items__Pickups;
 using Il2CppInventory__Items__Pickups.Xp_and_Levels;
 using Il2CppRewired.Utils;
+using Il2CppSystem.Diagnostics;
 using Il2CppTMPro;
 using MelonLoader;
 using Multibonk.Networking.Lobby;
@@ -213,6 +215,54 @@ namespace Multibonk.Game.Patches
                 GameEvents.TriggerAddXpEvent(__0);
 
                 return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(Animator), "SetBool", new System.Type[] { typeof(string), typeof(bool) })]
+        class SetBoolPatch
+        {
+            static void Prefix(Animator __instance, string __0, bool __1)
+            {
+                bool currentValue = __instance.GetBool(__0);
+                if (currentValue != __1)
+                {
+                    GameEvents.TriggerSetBool(__instance, __0, __1);
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(Animator), "SetFloat", new System.Type[] { typeof(string), typeof(float) })]
+        class SetFloatPatch
+        {
+            static void Prefix(Animator __instance, string __0, float __1)
+            {
+                float currentValue = __instance.GetFloat(__0);
+                if (currentValue != __1)
+                {
+                    GameEvents.TriggerSetFloat(__instance, __0, __1);
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(Animator), "SetInteger", new System.Type[] { typeof(string), typeof(int) })]
+        class SetIntegerPatch
+        {
+            static void Prefix(Animator __instance, string __0, int __1)
+            {
+                int currentValue = __instance.GetInteger(__0);
+                if (currentValue != __1)
+                {
+                    GameEvents.TriggerSetInt(__instance, __0, __1);
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(Animator), "SetTrigger", new System.Type[] { typeof(string) })]
+        class SetTriggerPatch
+        {
+            static void Prefix(Animator __instance, string __0)
+            {
+                GameEvents.TriggerSetTrigger(__instance, __0);
             }
         }
 
