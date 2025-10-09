@@ -38,7 +38,9 @@ namespace Multibonk.Game
                 string targetName = prefab.name + "(Clone)";
 
                 var instances = allObjects
-                    .Where(go => go.name == targetName)
+                    // this can possibly instantiate wrong prefabs if the game dev instantiates two different prefabs with the exact same name on the same
+                    // TODO: find a better way to find all those objects in the scene 
+                    .Where(go => go.name == targetName || go.name == prefab.name)
                     .ToList();
 
                 output.Add(i, instances);

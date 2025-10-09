@@ -252,10 +252,11 @@ namespace Multibonk.Game.Patches
         {
             static bool Prefix(ref List<GameObject> __0)
             {
-                if(LobbyPatchFlags.IsHosting)
+
+                if (LobbyPatchFlags.IsHosting)
                     return true;
 
-                MelonLogger.Msg("Generate called - prefabs");
+
 
                 __0 = new List<GameObject>();
 

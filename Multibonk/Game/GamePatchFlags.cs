@@ -1,4 +1,5 @@
 ﻿using Il2Cpp;
+using Il2CppAssets.Scripts.Game.MapGeneration;
 using UnityEngine;
 
 namespace Multibonk.Game
@@ -34,12 +35,23 @@ namespace Multibonk.Game
 
                 list.AddRange(SelectedMapData.shrines);
 
-                return list.Concat
-                    (
-                        SelectedMapData.stages?
-                                .SelectMany(s => s.randomMapObjects)
-                                .SelectMany(d => d.prefabs).ToList()
-                    ).ToList();
+                return list
+                 .Concat(
+                     SelectedMapData.stages?
+                         .SelectMany(s => s.randomMapObjects)
+                         .SelectMany(d => d.prefabs)
+                         .ToList()
+                 )
+                 .Concat(
+                    SelectedMapData.stages?
+                         .Select(s => s.stageTilePrefabs)
+                         .SelectMany(t => t.flatTilePrefabs)
+                         .SelectMany(prefab =>
+                            Enumerable.Range(0, prefab.transform.childCount)
+                                      .Select(i => prefab.transform.GetChild(i).gameObject))
+                         .ToList()
+                 )
+                 .ToList();
             }
         }
 
