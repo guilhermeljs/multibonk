@@ -39,6 +39,9 @@ namespace Multibonk.Game
         public static event Action<Animator, string, int> SetIntEvent;
         public static event Action<Animator, string> SetTriggerEvent;
 
+        public static event Action<BaseInteractable> BaseInteractableSpawnedEvent;
+        public static event Action<int> BaseInteractableDestroyedEvent;
+
 
         public static void TriggerSetBool(Animator animator, string param, bool value) => SetBoolEvent?.Invoke(animator, param, value);
         public static void TriggerSetFloat(Animator animator, string param, float value) => SetFloatEvent?.Invoke(animator, param, value);
@@ -78,6 +81,16 @@ namespace Multibonk.Game
         public static void TriggerPlayerRotated(Quaternion newRotation)
         {
             PlayerRotateEvent?.Invoke(newRotation);
+        }
+
+        public static void TriggerBaseInteractableSpawned(BaseInteractable interactable)
+        {
+            BaseInteractableSpawnedEvent?.Invoke(interactable);
+        }
+
+        public static void TriggerBaseInteractableDestroyed(int instanceId)
+        {
+            BaseInteractableDestroyedEvent?.Invoke(instanceId);
         }
     }
 }

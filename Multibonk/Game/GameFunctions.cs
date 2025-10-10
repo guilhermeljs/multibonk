@@ -92,6 +92,94 @@ namespace Multibonk.Game
 
             GamePatchFlags.PlayersCache.Add(playerId, new SpawnedNetworkPlayer(player));
         }
+
+        /// <summary>
+        /// Spawns a BaseInteractable in the scene from network data
+        /// </summary>
+        /// <param name="instanceId">Instance ID of the interactable</param>
+        /// <param name="prefabName">Name of the prefab</param>
+        /// <param name="position">World position</param>
+        /// <param name="rotation">Rotation</param>
+        /// <param name="scale">Scale</param>
+        /// <param name="isItemSource">Whether it is an item source</param>
+        /// <param name="showOutline">Whether to show outline</param>
+        public static void SpawnNetworkInteractable(
+            int instanceId,
+            string prefabName,
+            Vector3 position,
+            Quaternion rotation,
+            Vector3 scale,
+            bool isItemSource,
+            bool showOutline)
+        {
+            try
+            {
+                // Try to find the original prefab in the scene
+                var originalObject = GameObject.Find(prefabName);
+                if (originalObject == null)
+                {
+                    MelonLogger.Warning($"Could not find prefab {prefabName} in scene");
+                    return;
+                }
+
+                // Instantiate a copy of the object
+                var obj = UnityEngine.Object.Instantiate(originalObject, position, rotation);
+                obj.name = $"{prefabName}_Network_{instanceId}";
+                obj.transform.localScale = scale;
+
+                // Get the BaseInteractable component
+                var interactable = obj.GetComponent<BaseInteractable>();
+                if (interactable != null)
+                {
+                    interactable.isItemSource = isItemSource;
+                    interactable.showOutline = showOutline;
+
+                    // Register in cache using the instanceId received from network
+                    GamePatchFlags.TrackInteractable(instanceId, interactable);
+
+                    MelonLogger.Msg($"Spawned network interactable: {prefabName} (ID: {instanceId})");
+                }
+                else
+                {
+                    MelonLogger.Warning($"Object {prefabName} does not have BaseInteractable component");
+                    UnityEngine.Object.Destroy(obj);
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"Error spawning interactable {prefabName}: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Destroys a network-synchronized BaseInteractable
+        /// </summary>
+        /// <param name="instanceId">Instance ID of the interactable</param>
+        public static void DestroyNetworkInteractable(int instanceId)
+        {
+            try
+            {
+                var interactable = GamePatchFlags.GetTrackedInteractable(instanceId);
+                if (interactable != null && !interactable.IsNullOrDestroyed())
+                {
+                    MelonLogger.Msg($"Destroying network interactable (ID: {instanceId})");
+                    
+                    // Remove from cache before destroying to avoid loops
+                    GamePatchFlags.UntrackInteractable(instanceId);
+                    
+                    // Destroy the GameObject
+                    UnityEngine.Object.Destroy(interactable.gameObject);
+                }
+                else
+                {
+                    MelonLogger.Warning($"Attempted to destroy non-existent interactable (ID: {instanceId})");
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"Error destroying interactable {instanceId}: {ex.Message}");
+            }
+        }
     }
 
 
@@ -125,4 +213,3 @@ namespace Multibonk.Game
         }
     }
 }
- 

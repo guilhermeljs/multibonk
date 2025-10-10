@@ -266,6 +266,35 @@ namespace Multibonk.Game.Patches
             }
         }
 
+        [HarmonyPatch(typeof(BaseInteractable), "Start")]
+        class BaseInteractableStartPatch
+        {
+            static void Postfix(BaseInteractable __instance)
+            {
+                // Only the host should propagate interactable creation
+                if (LobbyPatchFlags.IsHosting)
+                {
+                    GameEvents.TriggerBaseInteractableSpawned(__instance);
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(BaseInteractable), "OnDestroy")]
+        class BaseInteractableDestroyPatch
+        {
+            static void Prefix(BaseInteractable __instance)
+            {
+                // Anyone can propagate destruction (host or client)
+                int instanceId = __instance.GetInstanceID();
+                
+                // Check if this interactable is being tracked
+                if (GamePatchFlags.IsInteractableTracked(instanceId))
+                {
+                    GameEvents.TriggerBaseInteractableDestroyed(instanceId);
+                }
+            }
+        }
+
 
         //[HarmonyPatch(typeof(MapGenerationController), "Awake")]
         //class GeneratorAll
@@ -283,7 +312,7 @@ namespace Multibonk.Game.Patches
         {
             static bool Prefix(RandomObjectPlacer __instance)
             {
-                if(LobbyPatchFlags.IsHosting)
+                if (LobbyPatchFlags.IsHosting)
                     return true;
 
                 MelonLogger.Msg("Generating interactables called");
