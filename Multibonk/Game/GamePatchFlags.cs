@@ -27,7 +27,8 @@ namespace Multibonk.Game
         /// </summary>
         public static List<GameObject> MapDataIndexedPrefabs
         {
-            get {
+            get
+            {
                 if (SelectedMapData == null)
                     return new List<GameObject>();
 
@@ -55,7 +56,11 @@ namespace Multibonk.Game
             }
         }
 
-        public static Dictionary<ushort, SpawnedNetworkPlayer> PlayersCache = new Dictionary<ushort, SpawnedNetworkPlayer>();
+    public static Dictionary<ushort, SpawnedNetworkPlayer> PlayersCache = new Dictionary<ushort, SpawnedNetworkPlayer>();
+
+    // Tracks BaseInteractables synchronized over the network
+    // Key: Unity InstanceID, Value: BaseInteractable
+    public static Dictionary<int, BaseInteractable> InteractablesCache = new Dictionary<int, BaseInteractable>();
 
         public static int Seed { get; set; } = _rng.Next(int.MinValue, int.MaxValue);
 
@@ -64,5 +69,28 @@ namespace Multibonk.Game
 
         public static Vector3 LastPlayerPosition { get; set; }
         public static Quaternion LastPlayerRotation { get; set; }
+
+        public static bool IsInteractableTracked(int instanceId)
+        {
+            return InteractablesCache.ContainsKey(instanceId);
+        }
+
+        public static void TrackInteractable(int instanceId, BaseInteractable interactable)
+        {
+            if (!InteractablesCache.ContainsKey(instanceId))
+            {
+                InteractablesCache.Add(instanceId, interactable);
+            }
+        }
+
+        public static void UntrackInteractable(int instanceId)
+        {
+            InteractablesCache.Remove(instanceId);
+        }
+
+        public static BaseInteractable GetTrackedInteractable(int instanceId)
+        {
+            return InteractablesCache.TryGetValue(instanceId, out var interactable) ? interactable : null;
+        }
     }
 }

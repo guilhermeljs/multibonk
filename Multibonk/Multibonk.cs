@@ -22,7 +22,7 @@ namespace Multibonk
 
         public override void OnGUI()
         {
-            if(manager != null)
+            if (manager != null)
                 manager.OnGUI();
 
         }
@@ -53,6 +53,7 @@ namespace Multibonk
             services.AddSingleton<IGameEventHandler, PlayerMovementEventHandler>();
             services.AddSingleton<IGameEventHandler, StartGameEventHandler>();
             services.AddSingleton<IGameEventHandler, PlayerLevelEventHandler>();
+            services.AddSingleton<IGameEventHandler, BaseInteractableEventHandler>();
             services.AddSingleton<IGameEventHandler, GameDispatcher>();
 
             services.AddSingleton<EventHandlerExecutor>();
@@ -64,6 +65,7 @@ namespace Multibonk
             services.AddSingleton<IServerPacketHandler, PlayerAnimatorPacketHandler>();
             services.AddSingleton<IServerPacketHandler, GameLoadedPacketHandler>();
             services.AddSingleton<IServerPacketHandler, PlayerPickupXpPacketHandler>();
+            services.AddSingleton<IServerPacketHandler, Multibonk.Networking.Comms.Server.Handlers.DestroyInteractablePacketHandler>();
 
             services.AddSingleton<IClientPacketHandler, LobbyPlayerListPacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerSelectedCharacterPacketHandler>();
@@ -75,6 +77,8 @@ namespace Multibonk
             services.AddSingleton<IClientPacketHandler, PlayerRotatedPacketHandler>();
             services.AddSingleton<IClientPacketHandler, MapFinishedLoadingPacketHandler>();
             services.AddSingleton<IClientPacketHandler, MapObjectChunkPacketHandler>();
+            services.AddSingleton<IClientPacketHandler, SpawnInteractablePacketHandler>();
+            services.AddSingleton<IClientPacketHandler, Multibonk.Networking.Comms.Client.Handlers.DestroyInteractablePacketHandler>();
 
             services.AddSingleton<ClientProtocol>();
             services.AddSingleton<ServerProtocol>();
