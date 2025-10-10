@@ -1,6 +1,4 @@
-﻿using System;
-using Multibonk.Networking.Comms.Packet.Base;
-using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
+﻿using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
 
 namespace Multibonk.Networking.Comms.Base.Packet
 {

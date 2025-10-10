@@ -1,6 +1,6 @@
-﻿using System.Net;
+﻿using Multibonk.Networking.Comms.Base;
+using System.Net;
 using System.Net.Sockets;
-using Multibonk.Networking.Comms.Base;
 
 namespace Multibonk.Networking.Comms.Server
 {
@@ -35,7 +35,8 @@ namespace Multibonk.Networking.Comms.Server
             if (running) return;
             running = true;
 
-            new Thread(() => {
+            new Thread(() =>
+            {
                 InternalStart();
             }).Start();
         }

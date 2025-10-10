@@ -1,17 +1,18 @@
 ﻿using MelonLoader;
-using Multibonk.UserInterface.Window;
 using Microsoft.Extensions.DependencyInjection;
-using Multibonk.Networking.Lobby;
-using Multibonk.Networking.Comms.Server.Protocols;
+using Multibonk.Game;
+using Multibonk.Game.Handlers;
+using Multibonk.Game.Handlers.Logic;
+using Multibonk.Game.Handlers.NetworkNotify;
+using Multibonk.Networking.Comms.Base;
+using Multibonk.Networking.Comms.Client.Handlers;
 using Multibonk.Networking.Comms.Client.Protocols;
 using Multibonk.Networking.Comms.Multibonk.Networking.Comms;
 using Multibonk.Networking.Comms.Server.Handlers;
-using Multibonk.Networking.Comms.Client.Handlers;
-using Multibonk.Game.Handlers;
-using Multibonk.Game;
-using Multibonk.Networking.Comms.Base;
-using Multibonk.Game.Handlers.NetworkNotify;
-using Multibonk.Game.Handlers.Logic;
+using Multibonk.Networking.Comms.Server.Protocols;
+using Multibonk.Networking.Lobby;
+using Multibonk.Networking.Steam;
+using Multibonk.UserInterface.Window;
 
 namespace Multibonk
 {
@@ -22,7 +23,7 @@ namespace Multibonk
 
         public override void OnGUI()
         {
-            if(manager != null)
+            if (manager != null)
                 manager.OnGUI();
 
         }
@@ -52,6 +53,7 @@ namespace Multibonk
             services.AddSingleton<IGameEventHandler, PlayerMovementEventHandler>();
             services.AddSingleton<IGameEventHandler, StartGameEventHandler>();
             services.AddSingleton<IGameEventHandler, UpdateNetworkPlayerAnimationsEventHandler>();
+            services.AddSingleton<IGameEventHandler, GameplayRuleSynchronizer>();
             services.AddSingleton<IGameEventHandler, GameDispatcher>();
 
             services.AddSingleton<EventHandlerExecutor>();
@@ -76,11 +78,14 @@ namespace Multibonk
 
             // Packet Handlers cannot call services. Otherwise, it will cause circular dependency
             services.AddSingleton<NetworkService>();
+            services.AddSingleton<SteamTunnelService>();
+            services.AddSingleton<SteamTunnelCallbackBinder>();
             services.AddSingleton<LobbyService>();
 
             services.AddSingleton<ClientLobbyWindow>();
             services.AddSingleton<ConnectionWindow>();
             services.AddSingleton<HostLobbyWindow>();
+            services.AddSingleton<OptionsWindow>();
 
             services.AddSingleton<UIManager>();
 
@@ -90,6 +95,8 @@ namespace Multibonk
             executor = serviceProvider.GetService<EventHandlerExecutor>();
 
             var _lobbyContext = serviceProvider.GetService<LobbyContext>();
+
+            serviceProvider.GetService<SteamTunnelCallbackBinder>();
 
             base.OnInitializeMelon();
         }

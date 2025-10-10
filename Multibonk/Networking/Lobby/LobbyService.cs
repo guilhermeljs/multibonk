@@ -1,6 +1,8 @@
-﻿using MelonLoader;
+using System;
+using MelonLoader;
 using Multibonk.Networking.Comms.Base.Packet;
 using Multibonk.Networking.Comms.Multibonk.Networking.Comms;
+using Multibonk.Networking.Steam;
 
 namespace Multibonk.Networking.Lobby
 {
@@ -8,26 +10,30 @@ namespace Multibonk.Networking.Lobby
     {
         private NetworkService NetworkService { get; }
         private LobbyContext CurrentLobby { get; }
+        private SteamTunnelService SteamTunnelService { get; }
 
-        public LobbyService(NetworkService service, LobbyContext context)
+        public LobbyService(NetworkService service, LobbyContext context, SteamTunnelService steamTunnelService)
         {
             NetworkService = service;
             CurrentLobby = context;
+            SteamTunnelService = steamTunnelService;
         }
 
-        public void CreateLobby(string myName)
+        public void CreateLobby(string myName, int port)
         {
-            MelonLogger.Msg($"Creating lobby");
+            MelonLogger.Msg($"Creating lobby on port {port}");
             try
             {
-                NetworkService.StartServer();
+                NetworkService.StartServer(port);
             }
             catch (Exception e)
             {
                 MelonLogger.Msg($"Failed to start lobby {e.Message}");
-                CurrentLobby.TriggerLobbyJoinFailed($"Failed to start lobby {e.Message}");
+                CurrentLobby.TriggerLobbyJoinFailed($"Failed to start lobby: {e.Message}");
                 return;
             }
+
+            SteamTunnelService.ClearEndpoints();
 
             CurrentLobby.GetPlayers().Clear();
             CurrentLobby.SetMyself(new LobbyPlayer(name: myName));
@@ -38,6 +44,13 @@ namespace Multibonk.Networking.Lobby
 
         public void JoinLobby(string ip, int port, string myName)
         {
+            if (SteamTunnelService.TryConsumeEndpoint(out var endpoint))
+            {
+                ip = endpoint.Address;
+                port = endpoint.Port;
+                MelonLogger.Msg($"Using Steam tunnel endpoint {endpoint}.");
+            }
+
             MelonLogger.Msg($"Joining lobby {ip}:{port} with the username: {myName}");
 
             try
@@ -81,13 +94,12 @@ namespace Multibonk.Networking.Lobby
             }
             finally
             {
+                SteamTunnelService.ClearEndpoints();
                 CurrentLobby.TriggerLobbyClosed();
                 CurrentLobby.GetPlayers().Clear();
                 CurrentLobby.SetState(LobbyState.None);
                 LobbyPatchFlags.IsHosting = false;
             }
-
         }
     }
-
 }

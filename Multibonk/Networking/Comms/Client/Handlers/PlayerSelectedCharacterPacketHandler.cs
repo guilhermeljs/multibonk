@@ -1,5 +1,5 @@
-﻿using Multibonk.Networking.Comms.Base.Packet;
-using Multibonk.Networking.Comms.Base;
+﻿using Multibonk.Networking.Comms.Base;
+using Multibonk.Networking.Comms.Base.Packet;
 using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
 using Multibonk.Networking.Lobby;
 

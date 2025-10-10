@@ -15,9 +15,16 @@ namespace Multibonk.Game
 
         public static int Seed { get; set; } = _rng.Next(int.MinValue, int.MaxValue);
 
-        public static bool AllowStartMapCall { get; set; } = false; 
+        public static bool AllowStartMapCall { get; set; } = false;
 
         public static Vector3 LastPlayerPosition { get; set; }
         public static Quaternion LastPlayerRotation { get; set; }
+
+        public static GameplayRulesSnapshot GameplayRules { get; private set; } = GameplayRulesSnapshot.FromPreferences();
+
+        public static void SetGameplayRules(GameplayRulesSnapshot snapshot)
+        {
+            GameplayRules = snapshot;
+        }
     }
 }

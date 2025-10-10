@@ -1,7 +1,4 @@
-﻿
-
-using System.Runtime.CompilerServices;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Il2Cpp;
 using Il2CppAssets.Scripts.Actors.Player;
 using Il2CppRewired.Utils;

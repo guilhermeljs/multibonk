@@ -1,6 +1,4 @@
-﻿using System.Net.Sockets;
-
-namespace Multibonk.Networking.Comms.Base
+﻿namespace Multibonk.Networking.Comms.Base
 {
     public interface IProtocol
     {

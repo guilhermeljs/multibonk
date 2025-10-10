@@ -1,7 +1,7 @@
-﻿using Multibonk.Networking.Comms.Base.Packet.Multibonk.Networking.Comms.Base.Packet;
-using Multibonk.Networking.Comms.Base.Packet;
-using Multibonk.Networking.Lobby;
+﻿using Multibonk.Networking.Comms.Base.Packet;
+using Multibonk.Networking.Comms.Base.Packet.Multibonk.Networking.Comms.Base.Packet;
 using Multibonk.Networking.Comms.Multibonk.Networking.Comms;
+using Multibonk.Networking.Lobby;
 
 namespace Multibonk.Game.Handlers.NetworkNotify
 {

@@ -1,10 +1,10 @@
-﻿using Multibonk.Networking.Comms.Base.Packet;
-using Multibonk.Networking.Comms.Base;
-using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
-using Multibonk.Game;
-using Il2Cpp;
-using Multibonk.Game.Handlers;
+﻿using Il2Cpp;
 using MelonLoader;
+using Multibonk.Game;
+using Multibonk.Game.Handlers;
+using Multibonk.Networking.Comms.Base;
+using Multibonk.Networking.Comms.Base.Packet;
+using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
 
 namespace Multibonk.Networking.Comms.Client.Handlers
 {

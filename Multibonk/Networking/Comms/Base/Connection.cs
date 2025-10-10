@@ -1,6 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿using MelonLoader;
+using System.Collections.Concurrent;
 using System.Net.Sockets;
-using MelonLoader;
 
 namespace Multibonk.Networking.Comms.Base
 {
@@ -32,7 +32,7 @@ namespace Multibonk.Networking.Comms.Base
         {
             this.client = client ?? throw new ArgumentNullException(nameof(client));
 
-            foreach(var packet in packets)
+            foreach (var packet in packets)
             {
                 outgoingPackets.Enqueue(packet);
             }
