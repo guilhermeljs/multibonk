@@ -15,25 +15,14 @@ namespace Multibonk.Game.World.Session
         public NetworkPlayerManager PlayerManager { get; private set; }
         public WorldEnemyManager EnemyManager { get; private set; }
         public MapManager MapManager { get; private set; }
+        public PauseManager PauseManager { get; private set; }
 
         public GameSession(byte myClientId)
         {
             PlayerManager = new NetworkPlayerManager();
             EnemyManager = new WorldEnemyManager(myClientId);
             MapManager = new MapManager();
-        }
-
-        private static bool IsPlaying = false;
-
-        //public static EnemyDictionary<Enemy> SpawnedEnemies;
-        //public static Vector3 LastPlayerPosition { get; set; }
-        //public static Quaternion LastPlayerRotation { get; set; }
-
-        //public static Dictionary<byte, NetworkPlayer> PlayersCache = new();
-
-        public void Reset()
-        {
-            PlayerManager.Clear();
+            PauseManager = new PauseManager();
         }
 
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Multibonk.Game
 {
-    internal static class GameEvents
+    internal static class GamePatchEvents
     {
         public static event Action ConfirmCharacterEvent;
         public static event Action ConfirmMapEvent;
@@ -30,8 +30,15 @@ namespace Multibonk.Game
 
         public static event Action EnemyDieEvent;
 
-        public static event Action InGamePauseEvent;
-        public static event Action InGameUnpauseEvent;
+        /// <summary>
+        /// Pauses triggered by network won't call this
+        /// </summary>
+        public static event Action PauseEvent;
+        /// <summary>
+        /// Unpauses triggered by network won't call this.
+        /// </summary>
+        public static event Action UnpauseEvent;
+        
 
         public static event Action UseShrineEvent;
 
@@ -54,9 +61,15 @@ namespace Multibonk.Game
         public static event Action<EnemyManager, EnemyData, int, bool, EEnemyFlag, bool> OnSpawnEnemyBasic;
         public static event Action<EnemyManager, EnemyData, Vector3, int, bool, EEnemyFlag, bool> OnSpawnEnemyWithPosition;
 
-        public static void TriggerEnemySpawned(Enemy enemy)
+
+        public static void TriggerPauseEvent()
         {
-            EnemySpawnedEvent?.Invoke(enemy);
+            PauseEvent?.Invoke();
+        }
+
+        public static void TriggerUnpauseEvent()
+        {
+            UnpauseEvent?.Invoke();
         }
 
         public static void TriggerEnemyDie(Enemy enemy)

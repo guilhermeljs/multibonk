@@ -10,6 +10,7 @@ using Il2CppAssets.Scripts.Actors.Player;
 using Il2CppAssets.Scripts.Game.MapGeneration;
 using Il2CppAssets.Scripts.Inventory__Items__Pickups;
 using Il2CppAssets.Scripts.Managers;
+using Il2CppAssets.Scripts.Utility;
 using Il2CppInventory__Items__Pickups.Xp_and_Levels;
 using Il2CppTMPro;
 using MelonLoader;
@@ -44,7 +45,7 @@ namespace Multibonk.Game.Patches
                     buttonConfirm.GetComponentInChildren<TMP_Text>().text = "Aguardando host...";
                     buttonConfirm.GetComponent<ResizeOnLocalization>().DelayedRefresh();
 
-                    GameEvents.TriggerConfirmCharacter();
+                    GamePatchEvents.TriggerConfirmCharacter();
                 }
 
                 //return false;
@@ -82,12 +83,39 @@ namespace Multibonk.Game.Patches
         //    }
         //}
 
+
+        [HarmonyPatch(typeof(MyTime), "Pause")]
+        class PausePatch
+        {
+            static bool Prefix()
+            {
+                GamePatchEvents.TriggerPauseEvent();
+                return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(MyTime), "Unpause")]
+        class UnpausePatch
+        {
+            static bool Prefix()
+            {
+                if(GamePatchFlags.AllowUnpauseCall)
+                {
+                    return true;
+                }
+
+                GamePatchEvents.TriggerUnpauseEvent();
+                return false;
+            }
+        }
+
+
         [HarmonyPatch(typeof(MyPlayer), "Start")]
         class GameStartedPatch
         {
             static void Postfix()
             {
-                GameEvents.TriggerGameLoadedEvent();
+                GamePatchEvents.TriggerGameLoadedEvent();
             }
         }
 
@@ -96,7 +124,7 @@ namespace Multibonk.Game.Patches
         {
             static void Postfix(SelectionGroupToggleSingleButton __0, MapData __1)
             {
-                GameEvents.TriggerMapChanged(__1);
+                GamePatchEvents.TriggerMapChanged(__1);
             }
         }
 
@@ -107,7 +135,7 @@ namespace Multibonk.Game.Patches
             {
                 if (!GamePatchFlags.AllowStartMapCall)
                 {
-                    GameEvents.TriggerConfirmMap();
+                    GamePatchEvents.TriggerConfirmMap();
                     return false;
                 }
 
@@ -122,14 +150,14 @@ namespace Multibonk.Game.Patches
             [HarmonyPostfix]
             static void Postfix_NoParams(Enemy __instance)
             {
-                GameEvents.TriggerEnemyDie(__instance);
+                GamePatchEvents.TriggerEnemyDie(__instance);
             }
 
             [HarmonyPatch(typeof(Enemy), "EnemyDied", new Type[] { typeof(DamageContainer) })]
             [HarmonyPostfix]
             static void Postfix_WithDamage(Enemy __instance)
             {
-                GameEvents.TriggerEnemyDie(__instance);
+                GamePatchEvents.TriggerEnemyDie(__instance);
             }
         }
 
@@ -140,7 +168,7 @@ namespace Multibonk.Game.Patches
             {
                 if (btn != null)
                 {
-                    GameEvents.TriggerCharacterChanged(btn.characterData);
+                    GamePatchEvents.TriggerCharacterChanged(btn.characterData);
                 }
             }
         }
@@ -232,7 +260,7 @@ namespace Multibonk.Game.Patches
                 if (GamePatchFlags.AllowAddXpCall)
                     return true;
 
-                GameEvents.TriggerAddXpEvent(__0);
+                GamePatchEvents.TriggerAddXpEvent(__0);
 
                 return true;
             }
@@ -246,7 +274,7 @@ namespace Multibonk.Game.Patches
                 bool currentValue = __instance.GetBool(__0);
                 if (currentValue != __1)
                 {
-                    GameEvents.TriggerSetBool(__instance, __0, __1);
+                    GamePatchEvents.TriggerSetBool(__instance, __0, __1);
                 }
             }
         }
@@ -259,7 +287,7 @@ namespace Multibonk.Game.Patches
                 float currentValue = __instance.GetFloat(__0);
                 if (currentValue != __1)
                 {
-                    GameEvents.TriggerSetFloat(__instance, __0, __1);
+                    GamePatchEvents.TriggerSetFloat(__instance, __0, __1);
                 }
             }
         }
@@ -272,7 +300,7 @@ namespace Multibonk.Game.Patches
                 int currentValue = __instance.GetInteger(__0);
                 if (currentValue != __1)
                 {
-                    GameEvents.TriggerSetInt(__instance, __0, __1);
+                    GamePatchEvents.TriggerSetInt(__instance, __0, __1);
                 }
             }
         }
@@ -282,7 +310,7 @@ namespace Multibonk.Game.Patches
         {
             static void Prefix(Animator __instance, string __0)
             {
-                GameEvents.TriggerSetTrigger(__instance, __0);
+                GamePatchEvents.TriggerSetTrigger(__instance, __0);
             }
         }
 
@@ -294,7 +322,7 @@ namespace Multibonk.Game.Patches
                 // only triggers the spawn enemy if the game called it
                 if (!GamePatchFlags.AllowSpawnEnemyCall)
                 {
-                    GameEvents.TriggerSpawnEnemy(__instance, __0, __1, __2, __3, __4);
+                    GamePatchEvents.TriggerSpawnEnemy(__instance, __0, __1, __2, __3, __4);
                 }
 
                 return true;
@@ -308,7 +336,7 @@ namespace Multibonk.Game.Patches
             {
                 if (!GamePatchFlags.AllowSpawnEnemyCall)
                 {
-                    GameEvents.TriggerSpawnEnemy(__instance, __0, __1, __2, __3, __4, __5);
+                    GamePatchEvents.TriggerSpawnEnemy(__instance, __0, __1, __2, __3, __4, __5);
                 }
 
 
@@ -325,7 +353,7 @@ namespace Multibonk.Game.Patches
                 /// 
                 if (__result != null && !GamePatchFlags.AllowSpawnEnemyCall)
                 {
-                    GameEvents.TriggerEnemySpawned(__result);
+                    GamePatchEvents.TriggerEnemySpawned(__result);
                 }
             }
         }
@@ -337,7 +365,7 @@ namespace Multibonk.Game.Patches
             {
                 if (__result != null && !GamePatchFlags.AllowSpawnEnemyCall)
                 {
-                    GameEvents.TriggerEnemySpawned(__result);
+                    GamePatchEvents.TriggerEnemySpawned(__result);
                 }
             }
         }

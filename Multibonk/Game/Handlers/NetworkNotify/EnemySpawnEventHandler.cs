@@ -14,7 +14,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
     {
         public EnemySpawnEventHandler(LobbyContext lobby, NetworkService network, GameWorld world)
         {
-            GameEvents.EnemySpawnedEvent += (e) =>
+            GamePatchEvents.EnemySpawnedEvent += (e) =>
             {
                 uint? enemyId = world.CurrentSession?.EnemyManager.RegisterEnemySpawned(e);
                 if (enemyId == null) return;

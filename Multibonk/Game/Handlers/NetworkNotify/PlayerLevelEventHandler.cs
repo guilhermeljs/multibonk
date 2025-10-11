@@ -11,7 +11,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
             LobbyContext lobbyContext
         )
         {
-            GameEvents.PlayerXpAddedEvent += (xp) =>
+            GamePatchEvents.PlayerXpAddedEvent += (xp) =>
             {
                 if (LobbyPatchFlags.IsHosting && Preferences.LevelSynchronization.Value)
                 {

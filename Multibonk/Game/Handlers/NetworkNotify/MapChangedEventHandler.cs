@@ -12,7 +12,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
             LobbyContext lobbyContext
         )
         {
-            GameEvents.MapChanged += (map) =>
+            GamePatchEvents.MapChanged += (map) =>
             {
                 MelonLogger.Msg("Choosing map " + map.name);
                 MapManager.SelectedMapData = map;

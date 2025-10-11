@@ -11,7 +11,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
     {
         public EnemyDeathEventHandler(LobbyContext lobby, NetworkService network, GameWorld world)
         {
-            GameEvents.EnemyDiedEvent += (enemy) =>
+            GamePatchEvents.EnemyDiedEvent += (enemy) =>
             {
                 if (enemy == null)
                     return;

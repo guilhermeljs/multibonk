@@ -10,7 +10,7 @@ namespace Multibonk.Game.Handlers.Logic
         private Quaternion lastRotation;
         private Vector3 lastScale;
 
-        public override void FixedUpdate()
+        public override void LateUpdate()
         {
             var player = MyPlayer.Instance;
             if (

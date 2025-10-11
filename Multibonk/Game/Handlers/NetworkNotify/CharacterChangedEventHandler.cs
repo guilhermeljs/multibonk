@@ -12,7 +12,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
             LobbyContext lobbyContext
         )
         {
-            GameEvents.CharacterChanged += (c) =>
+            GamePatchEvents.CharacterChanged += (c) =>
             {
                 MelonLogger.Msg($"Choosing character {c.eCharacter.ToString()}");
                 if (network.State == NetworkState.Connected)

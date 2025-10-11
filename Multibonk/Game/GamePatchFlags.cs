@@ -13,5 +13,7 @@ namespace Multibonk.Game
         public static bool AllowStartMapCall { get; set; } = false;
         public static bool AllowAddXpCall { get; set; } = false;
         public static bool AllowSpawnEnemyCall { get; set; } = false;
+        public static bool AllowPauseCall { get; set; } = false;
+        public static bool AllowUnpauseCall { get; set; } = false;
     }
 }

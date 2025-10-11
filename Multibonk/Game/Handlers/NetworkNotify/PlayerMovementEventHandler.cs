@@ -12,7 +12,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
             LobbyContext lobbyContext
         )
         {
-            GameEvents.PlayerMoveEvent += (pos) =>
+            GamePatchEvents.PlayerMoveEvent += (pos) =>
             {
                 if (LobbyPatchFlags.IsHosting)
                 {
@@ -30,7 +30,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
                 }
             };
 
-            GameEvents.PlayerRotateEvent += (rot) =>
+            GamePatchEvents.PlayerRotateEvent += (rot) =>
             {
 
                 if (LobbyPatchFlags.IsHosting)

@@ -13,7 +13,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
             GameWorld world
         )
         {
-            GameEvents.ConfirmMapEvent += () =>
+            GamePatchEvents.ConfirmMapEvent += () =>
             {
                 if (!LobbyPatchFlags.IsHosting)
                     return;

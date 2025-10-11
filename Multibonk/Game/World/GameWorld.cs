@@ -19,7 +19,7 @@ namespace Multibonk.Game.World
         {
             _lobby = context;
 
-            GameEvents.GameLoadedEvent += ()=>
+            GamePatchEvents.GameLoadedEvent += ()=>
             {
                 GameLoaded?.Invoke(CurrentSession);
             };

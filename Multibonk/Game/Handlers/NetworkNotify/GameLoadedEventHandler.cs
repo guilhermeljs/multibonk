@@ -90,7 +90,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
             };
 
             // This event shouldn't be here. TODO: Fix this
-            GameEvents.SetBoolEvent += (anim, param, v) =>
+            GamePatchEvents.SetBoolEvent += (anim, param, v) =>
             {
                 if (MyPlayer.Instance.playerRenderer.animator != anim)
                     return;
