@@ -6,13 +6,13 @@ namespace Multibonk.Networking.Comms.Base.Packet
 {
     public class PlayerAnimatorChangedPacket
     {
-        public ushort PlayerId { get; private set; }
+        public byte PlayerId { get; private set; }
         public PlayerAnimationId AnimationId { get; private set; }
         public bool Active { get; private set; }
 
         public PlayerAnimatorChangedPacket(IncomingMessage msg)
         {
-            PlayerId = msg.ReadUShort();
+            PlayerId = msg.ReadPlayerId();
             AnimationId = (PlayerAnimationId)msg.ReadByte();
             Active = msg.ReadByte() != 0;
         }
@@ -22,10 +22,10 @@ namespace Multibonk.Networking.Comms.Base.Packet
     {
         public readonly byte Id = (byte)ServerSentPacketId.PLAYER_ANIMATOR_CHANGED_PACKET;
 
-        public SendPlayerAnimatorChangedPacket(ushort playerId, PlayerAnimationId animationId, bool active)
+        public SendPlayerAnimatorChangedPacket(byte playerId, PlayerAnimationId animationId, bool active)
         {
             Message.WriteByte(Id);
-            Message.WriteUShort(playerId);
+            Message.WritePlayerId(playerId);
             Message.WriteByte((byte)animationId);
             Message.WriteByte((byte)(active ? 1 : 0));
         }

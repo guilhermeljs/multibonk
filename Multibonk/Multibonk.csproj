@@ -452,11 +452,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Game\Handlers\Logic\" />
-    <Folder Include="Game\Utils\" />
-  </ItemGroup>
-
 	<PropertyGroup>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>                                     

@@ -10,17 +10,17 @@ namespace Multibonk.Networking.Lobby
 
     public class LobbyPlayer
     {
-        private static int _uuidCounter = 0; // contador interno para IDs únicos
+        private static uint _uuidCounter = 0;
 
         public Connection Connection { get; private set; }
-        public ushort UUID { get; private set; }
+        public byte UUID { get; private set; }
         public string Name { get; private set; }
         public string SelectedCharacter { get; set; }
         public int Ping { get; set; }
 
         public LobbyPlayer(
             string name = "Unknown",
-            ushort? uuid = null,
+            byte? uuid = null,
             string selectedCharacter = "None",
             Connection connection = null
         )
@@ -36,7 +36,10 @@ namespace Multibonk.Networking.Lobby
             }
             else
             {
-                UUID = (ushort)System.Threading.Interlocked.Increment(ref _uuidCounter);
+                // TODO: Fix this. You can play up to 256 players in a lobby
+                // Today, the counter is not decreased. This would cause unintended behaviour if you played with more than 256 players EVEN IN DIFFERENT LOBBIES
+                // without closing the game.
+                UUID = (byte)System.Threading.Interlocked.Increment(ref _uuidCounter);
             }
         }
     }

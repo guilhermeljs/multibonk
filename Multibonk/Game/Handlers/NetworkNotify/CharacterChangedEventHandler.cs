@@ -14,7 +14,6 @@ namespace Multibonk.Game.Handlers.NetworkNotify
         {
             GameEvents.CharacterChanged += (c) =>
             {
-                GameFunctions.GetCharacterDataFromMainMenu();
                 MelonLogger.Msg($"Choosing character {c.eCharacter.ToString()}");
                 if (network.State == NetworkState.Connected)
                 {

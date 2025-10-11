@@ -1,6 +1,4 @@
-﻿using System;
-using Multibonk.Networking.Comms.Packet.Base;
-using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
+﻿using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
 
 namespace Multibonk.Networking.Comms.Base.Packet
 {
@@ -8,10 +6,10 @@ namespace Multibonk.Networking.Comms.Base.Packet
     {
         public readonly byte Id = (byte)ServerSentPacketId.PLAYER_SELECTED_CHARACTER;
 
-        public SendPlayerSelectedCharacterPacket(ushort playerId, string characterName)
+        public SendPlayerSelectedCharacterPacket(byte playerId, string characterName)
         {
             Message.WriteByte(Id);
-            Message.WriteUShort(playerId);   // 2 bytes
+            Message.WritePlayerId(playerId);
             Message.WriteString(characterName);
         }
     }
@@ -23,7 +21,7 @@ namespace Multibonk.Networking.Comms.Base.Packet
 
         public PlayerSelectedCharacterPacket(IncomingMessage msg)
         {
-            PlayerId = msg.ReadUShort();   // 2 bytes
+            PlayerId = msg.ReadPlayerId();
             CharacterName = msg.ReadString();
         }
     }

@@ -32,6 +32,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
 
             GameEvents.PlayerRotateEvent += (rot) =>
             {
+
                 if (LobbyPatchFlags.IsHosting)
                 {
                     lobbyContext.GetPlayers().ForEach(player =>

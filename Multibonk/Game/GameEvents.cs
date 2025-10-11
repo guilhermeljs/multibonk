@@ -1,4 +1,6 @@
 ﻿using Il2Cpp;
+using Il2CppAssets.Scripts.Actors.Enemies;
+using Il2CppAssets.Scripts.Managers;
 using UnityEngine;
 
 namespace Multibonk.Game
@@ -8,6 +10,7 @@ namespace Multibonk.Game
         public static event Action ConfirmCharacterEvent;
         public static event Action ConfirmMapEvent;
         public static event Action<CharacterData> CharacterChanged;
+        public static event Action<MapData> MapChanged;
         public static event Action GameLoadedEvent;
 
         public static event Action<Vector3> PlayerMoveEvent;
@@ -19,7 +22,12 @@ namespace Multibonk.Game
         public static event Action BossSpawnEvent;
         public static event Action BossDamagedEvent;
 
-        public static event Action EnemySpawnEvent;
+        /// <summary>
+        /// Enemies spawned by the network DO NOT call this event. This is for enemies that spawned in local only
+        /// </summary>
+        public static event Action<Enemy> EnemySpawnedEvent;
+        public static event Action<Enemy> EnemyDiedEvent;
+
         public static event Action EnemyDieEvent;
 
         public static event Action InGamePauseEvent;
@@ -38,6 +46,39 @@ namespace Multibonk.Game
         public static event Action<Animator, string, float> SetFloatEvent;
         public static event Action<Animator, string, int> SetIntEvent;
         public static event Action<Animator, string> SetTriggerEvent;
+
+        /// <summary>
+        /// This is called when the Spawn function is called by the game.
+        /// If our managed code calls the EnemyManager.SpawnFunction, it will not trigger this event
+        /// </summary>
+        public static event Action<EnemyManager, EnemyData, int, bool, EEnemyFlag, bool> OnSpawnEnemyBasic;
+        public static event Action<EnemyManager, EnemyData, Vector3, int, bool, EEnemyFlag, bool> OnSpawnEnemyWithPosition;
+
+        public static void TriggerEnemySpawned(Enemy enemy)
+        {
+            EnemySpawnedEvent?.Invoke(enemy);
+        }
+
+        public static void TriggerEnemyDie(Enemy enemy)
+        {
+            EnemyDiedEvent?.Invoke(enemy);
+        }
+
+
+        public static void TriggerSpawnEnemy(EnemyManager manager, EnemyData data, int summonerId, bool forceSpawn, EEnemyFlag enemyFlag, bool useDirectionBias)
+        {
+            OnSpawnEnemyBasic?.Invoke(manager, data, summonerId, forceSpawn, enemyFlag, useDirectionBias);
+        }
+
+        public static void TriggerMapChanged(MapData data)
+        {
+            MapChanged?.Invoke(data);
+        }
+
+        public static void TriggerSpawnEnemy(EnemyManager manager, EnemyData data, Vector3 position, int waveNumber, bool forceSpawn, EEnemyFlag enemyFlag, bool canBeElite)
+        {
+            OnSpawnEnemyWithPosition?.Invoke(manager, data, position, waveNumber, forceSpawn, enemyFlag, canBeElite);
+        }
 
 
         public static void TriggerSetBool(Animator animator, string param, bool value) => SetBoolEvent?.Invoke(animator, param, value);

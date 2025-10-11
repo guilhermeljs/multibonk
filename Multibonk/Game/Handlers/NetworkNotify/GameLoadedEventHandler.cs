@@ -1,8 +1,8 @@
 ﻿using Il2Cpp;
 using Il2CppAssets.Scripts.Actors.Player;
 using MelonLoader;
+using Multibonk.Game.World;
 using Multibonk.Networking.Comms.Base.Packet;
-using Multibonk.Networking.Comms.Client.Handlers;
 using Multibonk.Networking.Comms.Multibonk.Networking.Comms;
 using Multibonk.Networking.Lobby;
 using UnityEngine;
@@ -14,12 +14,12 @@ namespace Multibonk.Game.Handlers.NetworkNotify
         public LobbyContext LobbyContext { get; private set; }
         public NetworkService NetworkService { get; private set; }
 
-        public GameLoadedEventHandler(LobbyContext lobbyContext, NetworkService networkService)
+        public GameLoadedEventHandler(LobbyContext lobbyContext, NetworkService networkService, GameWorld world)
         {
             LobbyContext = lobbyContext;
             NetworkService = networkService;
 
-            GameEvents.GameLoadedEvent += () =>
+            world.GameLoaded += (session) =>
             {
                 if (!LobbyPatchFlags.IsHosting)
                     return;
@@ -30,8 +30,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
                 .ForEach(player =>
                 {
                     var character = Enum.Parse<ECharacter>(player.SelectedCharacter);
-                    var data = GamePatchFlags.CharacterData.Find(d => d.eCharacter == character);
-                    GameFunctions.SpawnNetworkPlayer(player.UUID, character, MyPlayer.Instance.transform.position, MyPlayer.Instance.transform.rotation);
+                    world.CurrentSession.PlayerManager.SpawnPlayer(player.UUID, character, MyPlayer.Instance.transform.position, MyPlayer.Instance.transform.rotation);
 
                     lobbyContext.GetPlayers()
                         .Where(target => target != player)
@@ -45,12 +44,16 @@ namespace Multibonk.Game.Handlers.NetworkNotify
                 });
             };
 
-            GameEvents.GameLoadedEvent += () =>
+            world.GameLoaded += (session) =>
             {
-                var spawnedObjects = GameFunctions.GetAllSpawnedMapDataPrefabs();
+                if (!LobbyPatchFlags.IsHosting)
+                    return;
 
 
+                var spawnedObjects = session.MapManager.GetAllSpawnedMapDataPrefabs();
                 var maxChunkSize = 50;
+
+                MelonLogger.Msg("All objects: " + spawnedObjects.Count);
 
                 lobbyContext.GetPlayers()
                     .Where(player => player.Connection != null)
@@ -101,6 +104,7 @@ namespace Multibonk.Game.Handlers.NetworkNotify
                 }
 
             };
+
         }
 
         private void HandleClientAnimatorEvent(string param, bool v)

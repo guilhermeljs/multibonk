@@ -1,10 +1,8 @@
 ﻿using Multibonk.Networking.Comms.Base.Packet;
 using Multibonk.Networking.Comms.Base;
 using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
-using Multibonk.Game;
-using Il2Cpp;
 using Multibonk.Game.Handlers;
-using MelonLoader;
+using Multibonk.Game.World;
 
 namespace Multibonk.Networking.Comms.Client.Handlers
 {
@@ -12,29 +10,21 @@ namespace Multibonk.Networking.Comms.Client.Handlers
     {
         public byte PacketId => (byte)ServerSentPacketId.START_GAME;
 
-        public StartGamePacketHandler()
+        private readonly GameWorld _world;
+
+        public StartGamePacketHandler(GameWorld world)
         {
-
+            _world = world;
         }
-
 
         public void Handle(IncomingMessage msg, Connection conn)
         {
             var packet = new StartGamePacket(msg);
-            GamePatchFlags.Seed = packet.Seed;
+            var seed = packet.Seed;
 
             GameDispatcher.Enqueue(() =>
             {
-                var ui = UnityEngine.Object.FindObjectOfType<MapSelectionUi>();
-                if (ui != null)
-                {
-                    GamePatchFlags.AllowStartMapCall = true;
-                    MelonLogger.Msg("Starting map..");
-                    ui.StartMap();
-
-                    MelonLogger.Msg("Map started succesfully..");
-                    GamePatchFlags.AllowStartMapCall = false;
-                }
+                _world.StartGame(seed);
             });
         }
     }

@@ -7,10 +7,10 @@ namespace Multibonk.Networking.Comms.Base.Packet
     {
         public readonly byte Id = (byte)ServerSentPacketId.PLAYER_MOVED_PACKET;
 
-        public SendPlayerMovedPacket(ushort playerId, Vector3 position)
+        public SendPlayerMovedPacket(byte playerId, Vector3 position)
         {
             Message.WriteByte(Id);
-            Message.WriteUShort(playerId);
+            Message.WritePlayerId(playerId);
             Message.WriteFloat(position.x);
             Message.WriteFloat(position.y);
             Message.WriteFloat(position.z);
@@ -19,12 +19,12 @@ namespace Multibonk.Networking.Comms.Base.Packet
 
     internal class PlayerMovedPacket
     {
-        public ushort PlayerId { get; private set; }
+        public byte PlayerId { get; private set; }
         public Vector3 Position { get; private set; }
 
         public PlayerMovedPacket(IncomingMessage msg)
         {
-            PlayerId = msg.ReadUShort();
+            PlayerId = msg.ReadPlayerId();
             Position = new Vector3(msg.ReadFloat(), msg.ReadFloat(), msg.ReadFloat());
         }
     }

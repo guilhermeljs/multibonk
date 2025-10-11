@@ -4,6 +4,7 @@ using Multibonk.Networking.Comms.Base;
 using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
 using Multibonk.Game.Handlers;
 using Multibonk.Game;
+using Multibonk.Game.World;
 
 namespace Multibonk.Networking.Comms.Server.Handlers
 {
@@ -14,29 +15,27 @@ namespace Multibonk.Networking.Comms.Server.Handlers
     {
         public byte PacketId => (byte)ClientSentPacketId.PLAYER_ROTATE_PACKET;
         private readonly LobbyContext _lobbyContext;
+        private readonly GameWorld _world;
 
-        public PlayerRotatePacketHandler(LobbyContext lobbyContext)
+        public PlayerRotatePacketHandler(LobbyContext lobbyContext, GameWorld world)
         {
             _lobbyContext = lobbyContext;
+            _world = world;
         }
-
 
         public void Handle(IncomingMessage msg, Connection conn)
         {
             var packet = new PlayerRotatePacket(msg);
-
             var playerId = _lobbyContext.GetPlayer(conn).UUID;
 
             GameDispatcher.Enqueue(() =>
             {
-                var go = GameFunctions.GetSpawnedPlayerFromId(playerId);
-
-                if (go != null)
+                var player = _world.CurrentSession?.PlayerManager.GetPlayer(playerId);
+                if (player != null)
                 {
-                    go.Rotate(packet.Rotation.eulerAngles);
+                    player.Rotate(packet.Rotation.eulerAngles);
                 }
             });
-
 
             foreach (var player in _lobbyContext.GetPlayers())
             {

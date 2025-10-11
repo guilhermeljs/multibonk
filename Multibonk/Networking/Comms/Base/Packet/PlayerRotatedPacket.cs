@@ -7,10 +7,10 @@ namespace Multibonk.Networking.Comms.Base.Packet
     {
         public readonly byte Id = (byte)ServerSentPacketId.PLAYER_ROTATED_PACKET;
 
-        public SendPlayerRotatedPacket(ushort playerId, Vector3 eulerAngles)
+        public SendPlayerRotatedPacket(byte playerId, Vector3 eulerAngles)
         {
             Message.WriteByte(Id);
-            Message.WriteUShort(playerId);
+            Message.WritePlayerId(playerId);
 
             Message.WriteByte((byte)(eulerAngles.x / 360f * 255f));
             Message.WriteByte((byte)(eulerAngles.y / 360f * 255f));
@@ -20,12 +20,12 @@ namespace Multibonk.Networking.Comms.Base.Packet
 
     internal class PlayerRotatedPacket
     {
-        public ushort PlayerId { get; private set; }
+        public byte PlayerId { get; private set; }
         public Vector3 EulerAngles { get; private set; }
 
         public PlayerRotatedPacket(IncomingMessage msg)
         {
-            PlayerId = msg.ReadUShort();
+            PlayerId = msg.ReadPlayerId();
 
             EulerAngles = new Vector3(
                 msg.ReadByte() / 255f * 360f,

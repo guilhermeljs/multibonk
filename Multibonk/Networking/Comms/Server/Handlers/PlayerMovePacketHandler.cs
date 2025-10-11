@@ -4,20 +4,21 @@ using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
 using Multibonk.Networking.Lobby;
 using Multibonk.Networking.Comms.Base.Packet;
 using Multibonk.Game.Handlers;
-using Multibonk.Game;
+using Multibonk.Game.World;
 
 namespace Multibonk.Networking.Comms.Server.Handlers
 {
     public class PlayerMovePacketHandler : IServerPacketHandler
     {
-
         public byte PacketId => (byte)ClientSentPacketId.PLAYER_MOVE_PACKET;
 
         private readonly LobbyContext _lobbyContext;
+        private readonly GameWorld _world;
 
-        public PlayerMovePacketHandler(LobbyContext lobbyContext)
+        public PlayerMovePacketHandler(LobbyContext lobbyContext, GameWorld world)
         {
             _lobbyContext = lobbyContext;
+            _world = world;
         }
 
         public void Handle(IncomingMessage msg, Connection conn)
@@ -28,7 +29,7 @@ namespace Multibonk.Networking.Comms.Server.Handlers
 
             GameDispatcher.Enqueue(() =>
             {
-                var go = GameFunctions.GetSpawnedPlayerFromId(playerId);
+                var go = _world.CurrentSession?.PlayerManager.GetPlayer(playerId);
 
                 if (go != null)
                 {
@@ -48,7 +49,6 @@ namespace Multibonk.Networking.Comms.Server.Handlers
 
                 player.Connection.EnqueuePacket(sendPacket);
             }
-
         }
     }
 }

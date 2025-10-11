@@ -16,6 +16,11 @@ namespace Multibonk.Networking.Comms.Packet.Base
                 offset = 0;
             }
 
+            public byte ReadPlayerId()
+            {
+                return ReadByte();
+            }
+
             public byte ReadByte()
             {
                 EnsureAvailable(1);
@@ -43,6 +48,14 @@ namespace Multibonk.Networking.Comms.Packet.Base
             {
                 EnsureAvailable(4);
                 int value = BitConverter.ToInt32(buffer, offset);
+                offset += 4;
+                return value;
+            }
+
+            public uint ReadUInt()
+            {
+                EnsureAvailable(4);
+                uint value = BitConverter.ToUInt32(buffer, offset);
                 offset += 4;
                 return value;
             }

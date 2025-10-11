@@ -4,14 +4,16 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using HarmonyLib;
 using Il2Cpp;
+using Il2CppAssets.Scripts.Actors;
+using Il2CppAssets.Scripts.Actors.Enemies;
 using Il2CppAssets.Scripts.Actors.Player;
 using Il2CppAssets.Scripts.Game.MapGeneration;
 using Il2CppAssets.Scripts.Inventory__Items__Pickups;
+using Il2CppAssets.Scripts.Managers;
 using Il2CppInventory__Items__Pickups.Xp_and_Levels;
-using Il2CppRewired.Utils;
-using Il2CppSystem.Diagnostics;
 using Il2CppTMPro;
 using MelonLoader;
+using Multibonk.Game.World.Session.Managers;
 using Multibonk.Networking.Lobby;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,42 +54,33 @@ namespace Multibonk.Game.Patches
 
 
 
-        [HarmonyPatch(typeof(MyPlayer), "FixedUpdate")]
-        class PlayerUpdatedPatch
-        {
-            static void Postfix()
-            {
-                var myPlayer = MyPlayer.Instance;
-                if (myPlayer == null) return;
-                if (myPlayer.gameObject.IsNullOrDestroyed()) return;
+        //[HarmonyPatch(typeof(MyPlayer), "FixedUpdate")]
+        //class PlayerUpdatedPatch
+        //{
+        //    static void Postfix()
+        //    {
+        //        var myPlayer = MyPlayer.Instance;
+        //        if (myPlayer == null) return;
+        //        if (myPlayer.gameObject.IsNullOrDestroyed()) return;
 
-                const float positionThreshold = 0.05f;
-                const float rotationThreshold = 10f;
+        //        const float positionThreshold = 0.05f;
+        //        const float rotationThreshold = 10f;
 
-                if ((myPlayer.transform.position - GamePatchFlags.LastPlayerPosition).sqrMagnitude > positionThreshold * positionThreshold)
-                {
-                    GamePatchFlags.LastPlayerPosition = myPlayer.transform.position;
-                    GameEvents.TriggerPlayerMoved(myPlayer.transform.position);
-                }
+        //        if ((myPlayer.transform.position - GamePatchFlags.LastPlayerPosition).sqrMagnitude > positionThreshold * positionThreshold)
+        //        {
+        //            GamePatchFlags.LastPlayerPosition = myPlayer.transform.position;
+        //            GameEvents.TriggerPlayerMoved(myPlayer.transform.position);
+        //        }
 
-                var rotation = myPlayer.playerRenderer.transform.rotation;
+        //        var rotation = myPlayer.playerRenderer.transform.rotation;
 
-                if (Quaternion.Angle(rotation, GamePatchFlags.LastPlayerRotation) > rotationThreshold)
-                {
-                    GamePatchFlags.LastPlayerRotation = rotation;
-                    GameEvents.TriggerPlayerRotated(rotation);
-                }
-            }
-        }
-
-        [HarmonyPatch(typeof(MapEntry), "OnMapSelected")]
-        class MapEntrySelectedPatch
-        {
-            static void Postfix(SelectionGroupToggleSingleButton __0, MapData __1)
-            {
-                GamePatchFlags.SelectedMapData = __1;
-            }
-        }
+        //        if (Quaternion.Angle(rotation, GamePatchFlags.LastPlayerRotation) > rotationThreshold)
+        //        {
+        //            GamePatchFlags.LastPlayerRotation = rotation;
+        //            GameEvents.TriggerPlayerRotated(rotation);
+        //        }
+        //    }
+        //}
 
         [HarmonyPatch(typeof(MyPlayer), "Start")]
         class GameStartedPatch
@@ -98,18 +91,45 @@ namespace Multibonk.Game.Patches
             }
         }
 
+        [HarmonyPatch(typeof(MapEntry), "OnMapSelected")]
+        class MapEntrySelectedPatch
+        {
+            static void Postfix(SelectionGroupToggleSingleButton __0, MapData __1)
+            {
+                GameEvents.TriggerMapChanged(__1);
+            }
+        }
 
         [HarmonyPatch(typeof(MapSelectionUi), "StartMap")]
         class ConfirmMapPatch
         {
             static bool Prefix()
             {
-                if (!LobbyPatchFlags.IsHosting && !GamePatchFlags.AllowStartMapCall)
+                if (!GamePatchFlags.AllowStartMapCall)
+                {
+                    GameEvents.TriggerConfirmMap();
                     return false;
-
-                GameEvents.TriggerConfirmMap();
+                }
 
                 return true;
+            }
+        }
+
+        [HarmonyPatch]
+        class EnemyDiedPatch
+        {
+            [HarmonyPatch(typeof(Enemy), "EnemyDied", new Type[] { })]
+            [HarmonyPostfix]
+            static void Postfix_NoParams(Enemy __instance)
+            {
+                GameEvents.TriggerEnemyDie(__instance);
+            }
+
+            [HarmonyPatch(typeof(Enemy), "EnemyDied", new Type[] { typeof(DamageContainer) })]
+            [HarmonyPostfix]
+            static void Postfix_WithDamage(Enemy __instance)
+            {
+                GameEvents.TriggerEnemyDie(__instance);
             }
         }
 
@@ -132,7 +152,7 @@ namespace Multibonk.Game.Patches
             static void Prefix(Il2Cpp.ProceduralTileGeneration __instance, UnityEngine.Vector3 __result, ref UnityEngine.Vector3 __0, Il2Cpp.StageData __1, Il2CppAssets.Scripts.MapGeneration.ProceduralTiles.MapParameters __2, ref bool __3)
             {
                 MelonLogger.Msg("Patching debug seed");
-                __instance.debugSeed = GamePatchFlags.Seed;
+                __instance.debugSeed = MapManager.Seed;
                 __3 = true;
             }
         }
@@ -266,6 +286,61 @@ namespace Multibonk.Game.Patches
             }
         }
 
+        [HarmonyPatch(typeof(EnemyManager), "SpawnEnemy", new System.Type[] { typeof(EnemyData), typeof(int), typeof(bool), typeof(EEnemyFlag), typeof(bool) })]
+        class SpawnEnemyPatch1
+        {
+            static bool Prefix(EnemyManager __instance, EnemyData __0, int __1, bool __2, EEnemyFlag __3, bool __4)
+            {
+                // only triggers the spawn enemy if the game called it
+                if (!GamePatchFlags.AllowSpawnEnemyCall)
+                {
+                    GameEvents.TriggerSpawnEnemy(__instance, __0, __1, __2, __3, __4);
+                }
+
+                return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(EnemyManager), "SpawnEnemy", new System.Type[] { typeof(EnemyData), typeof(Vector3), typeof(int), typeof(bool), typeof(EEnemyFlag), typeof(bool) })]
+        class SpawnEnemyPatch2
+        {
+            static bool Prefix(EnemyManager __instance, EnemyData __0, Vector3 __1, int __2, bool __3, EEnemyFlag __4, bool __5)
+            {
+                if (!GamePatchFlags.AllowSpawnEnemyCall)
+                {
+                    GameEvents.TriggerSpawnEnemy(__instance, __0, __1, __2, __3, __4, __5);
+                }
+
+
+                return true;
+            }
+        }
+
+
+        [HarmonyPatch(typeof(EnemyManager), "SpawnEnemy", new System.Type[] { typeof(EnemyData), typeof(int), typeof(bool), typeof(EEnemyFlag), typeof(bool) })]
+        class SpawnEnemyPostfix1
+        {
+            static void Postfix(Enemy __result)
+            {
+                /// 
+                if (__result != null && !GamePatchFlags.AllowSpawnEnemyCall)
+                {
+                    GameEvents.TriggerEnemySpawned(__result);
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(EnemyManager), "SpawnEnemy", new System.Type[] { typeof(EnemyData), typeof(Vector3), typeof(int), typeof(bool), typeof(EEnemyFlag), typeof(bool) })]
+        class SpawnEnemyPostfix2
+        {
+            static void Postfix(Enemy __result)
+            {
+                if (__result != null && !GamePatchFlags.AllowSpawnEnemyCall)
+                {
+                    GameEvents.TriggerEnemySpawned(__result);
+                }
+            }
+        }
 
         //[HarmonyPatch(typeof(MapGenerationController), "Awake")]
         //class GeneratorAll

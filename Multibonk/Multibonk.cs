@@ -12,6 +12,9 @@ using Multibonk.Game;
 using Multibonk.Networking.Comms.Base;
 using Multibonk.Game.Handlers.NetworkNotify;
 using Il2Cpp;
+using Multibonk.Networking.Comms.Client.Handlers.Player;
+using Multibonk.Game.World;
+using Multibonk.Game.Handlers.Logic;
 
 namespace Multibonk
 {
@@ -48,10 +51,16 @@ namespace Multibonk
         {
             var services = new ServiceCollection();
 
+            services.AddSingleton<GameWorld>();
+
             services.AddSingleton<IGameEventHandler, CharacterChangedEventHandler>();
             services.AddSingleton<IGameEventHandler, GameLoadedEventHandler>();
+            services.AddSingleton<IGameEventHandler, MapChangedEventHandler>();
             services.AddSingleton<IGameEventHandler, PlayerMovementEventHandler>();
+            services.AddSingleton<IGameEventHandler, EnemySpawnEventHandler>();
+            services.AddSingleton<IGameEventHandler, EnemyDeathEventHandler>();
             services.AddSingleton<IGameEventHandler, StartGameEventHandler>();
+            services.AddSingleton<IGameEventHandler, PlayerMoveEventTrigger>();
             services.AddSingleton<IGameEventHandler, PlayerLevelEventHandler>();
             services.AddSingleton<IGameEventHandler, GameDispatcher>();
 
@@ -62,7 +71,9 @@ namespace Multibonk
             services.AddSingleton<IServerPacketHandler, PlayerMovePacketHandler>();
             services.AddSingleton<IServerPacketHandler, PlayerRotatePacketHandler>();
             services.AddSingleton<IServerPacketHandler, PlayerAnimatorPacketHandler>();
+            services.AddSingleton<IServerPacketHandler, SpawnEnemyPacketHandler>();
             services.AddSingleton<IServerPacketHandler, GameLoadedPacketHandler>();
+            services.AddSingleton<IServerPacketHandler, KillEnemyPacketHandler>();
             services.AddSingleton<IServerPacketHandler, PlayerPickupXpPacketHandler>();
 
             services.AddSingleton<IClientPacketHandler, LobbyPlayerListPacketHandler>();
@@ -73,6 +84,8 @@ namespace Multibonk
             services.AddSingleton<IClientPacketHandler, PlayerXpPacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerMovedPacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerRotatedPacketHandler>();
+            services.AddSingleton<IClientPacketHandler, EnemySpawnedPacketHandler>();
+            services.AddSingleton<IClientPacketHandler, EnemyDeathPacketHandler>();
             services.AddSingleton<IClientPacketHandler, MapFinishedLoadingPacketHandler>();
             services.AddSingleton<IClientPacketHandler, MapObjectChunkPacketHandler>();
 
@@ -93,8 +106,11 @@ namespace Multibonk
 
             var serviceProvider = services.BuildServiceProvider();
 
+
+            var _world = serviceProvider.GetService<GameWorld>();
             manager = serviceProvider.GetService<UIManager>();
             executor = serviceProvider.GetService<EventHandlerExecutor>();
+            MelonLogger.Msg("Executor: " + executor.ToString());
 
             var _lobbyContext = serviceProvider.GetService<LobbyContext>();
 

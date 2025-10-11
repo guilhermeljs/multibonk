@@ -11,11 +11,15 @@ namespace Multibonk.Networking.Comms.Base
             buffer = new List<byte>();
         }
 
+        public void WritePlayerId(byte value) => WriteByte(value);
+
         public void WriteByte(byte value) => buffer.Add(value);
 
         public void WriteShort(short value) => buffer.AddRange(BitConverter.GetBytes(value));
 
         public void WriteInt(int value) => buffer.AddRange(BitConverter.GetBytes(value));
+
+        public void WriteUInt(uint value) => buffer.AddRange(BitConverter.GetBytes(value));
 
         public void WriteLong(long value) => buffer.AddRange(BitConverter.GetBytes(value));
 

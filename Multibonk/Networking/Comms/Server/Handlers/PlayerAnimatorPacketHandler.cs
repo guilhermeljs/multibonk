@@ -4,18 +4,19 @@ using Multibonk.Networking.Comms.Packet.Base.Multibonk.Networking.Comms;
 using Multibonk.Game.Handlers;
 using Multibonk.Networking.Comms.Base.Packet;
 using Multibonk.Networking.Lobby;
-using Multibonk.Game;
-using Multibonk.Networking.Comms.Client.Handlers;
+using Multibonk.Game.World;
 
 namespace Multibonk.Networking.Comms.Server.Handlers
 {
     internal class PlayerAnimatorPacketHandler: IServerPacketHandler
     {
         private readonly LobbyContext _lobbyContext;
+        private readonly GameWorld _world;
 
-        public PlayerAnimatorPacketHandler(LobbyContext lobbyContext)
+        public PlayerAnimatorPacketHandler(LobbyContext lobbyContext, GameWorld world)
         {
             _lobbyContext = lobbyContext;
+            _world = world;
         }
 
         public byte PacketId => (byte)ClientSentPacketId.PLAYER_ANIMATOR_PACKET;
@@ -28,7 +29,7 @@ namespace Multibonk.Networking.Comms.Server.Handlers
 
             GameDispatcher.Enqueue(() =>
             {
-                var go = GameFunctions.GetSpawnedPlayerFromId(playerId);
+                var go = _world.CurrentSession?.PlayerManager.GetPlayer(playerId);
 
                 if (go != null)
                 {

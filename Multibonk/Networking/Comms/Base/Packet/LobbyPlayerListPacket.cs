@@ -14,7 +14,7 @@ namespace Multibonk.Networking.Comms.Base.Packet
 
             foreach (var player in players)
             {
-                Message.WriteUShort(player.UUID);
+                Message.WritePlayerId(player.UUID);
                 Message.WriteString(player.Name);   
                 Message.WriteString(player.SelectedCharacter);
             }
@@ -32,7 +32,7 @@ namespace Multibonk.Networking.Comms.Base.Packet
 
             for (int i = 0; i < count; i++)
             {
-                ushort uuid = msg.ReadUShort();
+                var uuid = msg.ReadPlayerId();
                 string name = msg.ReadString();
                 string selectedCharacter = msg.ReadString();
                 players.Add(new LobbyPlayer(name, uuid, selectedCharacter));
