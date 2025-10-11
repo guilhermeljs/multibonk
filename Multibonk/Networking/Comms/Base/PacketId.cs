@@ -7,8 +7,7 @@
        LOBBY_PLAYER_LIST_PACKET = 0,
        PLAYER_SELECTED_CHARACTER = 1,
        START_GAME = 2,
-       PAUSE_GAME = 3,
-       UNPAUSE_GAME = 4,
+
        MAP_FINISHED_LOADING = 5,
        SPAWN_PLAYER_PACKET = 6,
 
@@ -18,7 +17,11 @@
        XP_PACKET = 10,
        PLAYER_ANIMATOR_CHANGED_PACKET = 11,
        ENEMY_DEATH_PACKET = 12,
-       ENEMY_SPAWNED_PACKET = 13
+       ENEMY_SPAWNED_PACKET = 13,
+
+
+        GAME_PAUSED = 3,
+        GAME_UNPAUSED = 4,
     }
 
     public enum ClientSentPacketId : byte
@@ -32,5 +35,8 @@
         PLAYER_ANIMATOR_PACKET = 6,
         SPAWN_ENEMY_PACKET = 7,
         KILL_ENEMY_PACKET = 8,
+
+        PAUSE_GAME = 9,
+        UNPAUSE_GAME = 10,
     }
 }

@@ -89,8 +89,13 @@ namespace Multibonk.Game.Patches
         {
             static bool Prefix()
             {
+                if (GamePatchFlags.AllowPauseCall)
+                {
+                    return true;
+                }
+
                 GamePatchEvents.TriggerPauseEvent();
-                return true;
+                return false;
             }
         }
 

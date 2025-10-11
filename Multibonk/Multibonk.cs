@@ -62,6 +62,7 @@ namespace Multibonk
             services.AddSingleton<IGameEventHandler, StartGameEventHandler>();
             services.AddSingleton<IGameEventHandler, PlayerMoveEventTrigger>();
             services.AddSingleton<IGameEventHandler, PlayerLevelEventHandler>();
+            services.AddSingleton<IGameEventHandler, GamePauseEventHandler>();
             services.AddSingleton<IGameEventHandler, GameDispatcher>();
 
             services.AddSingleton<EventHandlerExecutor>();
@@ -73,6 +74,8 @@ namespace Multibonk
             services.AddSingleton<IServerPacketHandler, PlayerAnimatorPacketHandler>();
             services.AddSingleton<IServerPacketHandler, SpawnEnemyPacketHandler>();
             services.AddSingleton<IServerPacketHandler, GameLoadedPacketHandler>();
+            services.AddSingleton<IServerPacketHandler, PauseGamePacketHandler>();
+            services.AddSingleton<IServerPacketHandler, UnpauseGamePacketHandler>();
             services.AddSingleton<IServerPacketHandler, KillEnemyPacketHandler>();
             services.AddSingleton<IServerPacketHandler, PlayerPickupXpPacketHandler>();
 
@@ -83,6 +86,8 @@ namespace Multibonk
             services.AddSingleton<IClientPacketHandler, StartGamePacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerXpPacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerMovedPacketHandler>();
+            services.AddSingleton<IClientPacketHandler, GamePausePacketHandler>();
+            services.AddSingleton<IClientPacketHandler, GameUnpausePacketHandler>();
             services.AddSingleton<IClientPacketHandler, PlayerRotatedPacketHandler>();
             services.AddSingleton<IClientPacketHandler, EnemySpawnedPacketHandler>();
             services.AddSingleton<IClientPacketHandler, EnemyDeathPacketHandler>();
@@ -110,7 +115,6 @@ namespace Multibonk
             var _world = serviceProvider.GetService<GameWorld>();
             manager = serviceProvider.GetService<UIManager>();
             executor = serviceProvider.GetService<EventHandlerExecutor>();
-            MelonLogger.Msg("Executor: " + executor.ToString());
 
             var _lobbyContext = serviceProvider.GetService<LobbyContext>();
 

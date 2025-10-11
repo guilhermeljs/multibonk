@@ -77,6 +77,11 @@ namespace Multibonk.Game
             EnemyDiedEvent?.Invoke(enemy);
         }
 
+        public static void TriggerEnemySpawned(Enemy e)
+        {
+            EnemySpawnedEvent?.Invoke(e);
+        }
+
 
         public static void TriggerSpawnEnemy(EnemyManager manager, EnemyData data, int summonerId, bool forceSpawn, EEnemyFlag enemyFlag, bool useDirectionBias)
         {

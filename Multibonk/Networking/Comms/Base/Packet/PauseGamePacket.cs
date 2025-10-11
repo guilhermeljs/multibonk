@@ -9,7 +9,7 @@ namespace Multibonk.Networking.Comms.Base.Packet
 
     public class SendPauseGamePacket : OutgoingPacket
     {
-        public readonly byte Id = (byte)ServerSentPacketId.PAUSE_GAME;
+        public readonly byte Id = (byte)ClientSentPacketId.PAUSE_GAME;
 
         public SendPauseGamePacket()
         {

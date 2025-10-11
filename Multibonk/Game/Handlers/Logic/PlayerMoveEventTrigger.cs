@@ -26,7 +26,7 @@ namespace Multibonk.Game.Handlers.Logic
             if (Vector3.Distance(t.position, lastPosition) >= 0.1f)
             {
                 lastPosition = t.position;
-                GameEvents.TriggerPlayerMoved(t.position);
+                GamePatchEvents.TriggerPlayerMoved(t.position);
             }
 
 
@@ -34,7 +34,7 @@ namespace Multibonk.Game.Handlers.Logic
             if (Quaternion.Angle(renderer.rotation, lastRotation) >= 15f)
             {
                 lastRotation = renderer.rotation;
-                GameEvents.TriggerPlayerRotated(renderer.rotation);
+                GamePatchEvents.TriggerPlayerRotated(renderer.rotation);
             }
 
             if (Vector3.Distance(t.localScale, lastScale) >= 0.01f)
